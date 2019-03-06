@@ -33,6 +33,7 @@
 #include <signal.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include "ujevois.h"
 
 //#include "../Downloads/raspicam-0.0.5/src/raspicam.h"
 
@@ -44,7 +45,6 @@
 #include "ucamera.h"
 #include "ubridge.h"
 #include "umission.h"
-#include "ujevois.h"
 // #include "ujoy.h"
 
 using namespace std;
