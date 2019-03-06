@@ -167,6 +167,33 @@ mission/fast:
 	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/build
 .PHONY : mission/fast
 
+TimeoutSerial.o: TimeoutSerial.cpp.o
+
+.PHONY : TimeoutSerial.o
+
+# target to build an object file
+TimeoutSerial.cpp.o:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/TimeoutSerial.cpp.o
+.PHONY : TimeoutSerial.cpp.o
+
+TimeoutSerial.i: TimeoutSerial.cpp.i
+
+.PHONY : TimeoutSerial.i
+
+# target to preprocess a source file
+TimeoutSerial.cpp.i:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/TimeoutSerial.cpp.i
+.PHONY : TimeoutSerial.cpp.i
+
+TimeoutSerial.s: TimeoutSerial.cpp.s
+
+.PHONY : TimeoutSerial.s
+
+# target to generate assembly for a file
+TimeoutSerial.cpp.s:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/TimeoutSerial.cpp.s
+.PHONY : TimeoutSerial.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -383,6 +410,33 @@ uinfo.cpp.s:
 	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uinfo.cpp.s
 .PHONY : uinfo.cpp.s
 
+ujevois.o: ujevois.cpp.o
+
+.PHONY : ujevois.o
+
+# target to build an object file
+ujevois.cpp.o:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/ujevois.cpp.o
+.PHONY : ujevois.cpp.o
+
+ujevois.i: ujevois.cpp.i
+
+.PHONY : ujevois.i
+
+# target to preprocess a source file
+ujevois.cpp.i:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/ujevois.cpp.i
+.PHONY : ujevois.cpp.i
+
+ujevois.s: ujevois.cpp.s
+
+.PHONY : ujevois.s
+
+# target to generate assembly for a file
+ujevois.cpp.s:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/ujevois.cpp.s
+.PHONY : ujevois.cpp.s
+
 ujoy.o: ujoy.cpp.o
 
 .PHONY : ujoy.o
@@ -558,6 +612,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... mission"
 	@echo "... list_install_components"
+	@echo "... TimeoutSerial.o"
+	@echo "... TimeoutSerial.i"
+	@echo "... TimeoutSerial.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -582,6 +639,9 @@ help:
 	@echo "... uinfo.o"
 	@echo "... uinfo.i"
 	@echo "... uinfo.s"
+	@echo "... ujevois.o"
+	@echo "... ujevois.i"
+	@echo "... ujevois.s"
 	@echo "... ujoy.o"
 	@echo "... ujoy.i"
 	@echo "... ujoy.s"

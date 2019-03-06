@@ -129,9 +129,57 @@ CMakeFiles/mission.dir/ucamera.cpp.o.provides: CMakeFiles/mission.dir/ucamera.cp
 CMakeFiles/mission.dir/ucamera.cpp.o.provides.build: CMakeFiles/mission.dir/ucamera.cpp.o
 
 
+CMakeFiles/mission.dir/ujevois.cpp.o: CMakeFiles/mission.dir/flags.make
+CMakeFiles/mission.dir/ujevois.cpp.o: ../ujevois.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mission.dir/ujevois.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/ujevois.cpp.o -c /home/local/mission/ujevois.cpp
+
+CMakeFiles/mission.dir/ujevois.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mission.dir/ujevois.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/local/mission/ujevois.cpp > CMakeFiles/mission.dir/ujevois.cpp.i
+
+CMakeFiles/mission.dir/ujevois.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mission.dir/ujevois.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/local/mission/ujevois.cpp -o CMakeFiles/mission.dir/ujevois.cpp.s
+
+CMakeFiles/mission.dir/ujevois.cpp.o.requires:
+
+.PHONY : CMakeFiles/mission.dir/ujevois.cpp.o.requires
+
+CMakeFiles/mission.dir/ujevois.cpp.o.provides: CMakeFiles/mission.dir/ujevois.cpp.o.requires
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/ujevois.cpp.o.provides.build
+.PHONY : CMakeFiles/mission.dir/ujevois.cpp.o.provides
+
+CMakeFiles/mission.dir/ujevois.cpp.o.provides.build: CMakeFiles/mission.dir/ujevois.cpp.o
+
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.o: CMakeFiles/mission.dir/flags.make
+CMakeFiles/mission.dir/TimeoutSerial.cpp.o: ../TimeoutSerial.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mission.dir/TimeoutSerial.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/TimeoutSerial.cpp.o -c /home/local/mission/TimeoutSerial.cpp
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mission.dir/TimeoutSerial.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/local/mission/TimeoutSerial.cpp > CMakeFiles/mission.dir/TimeoutSerial.cpp.i
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mission.dir/TimeoutSerial.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/local/mission/TimeoutSerial.cpp -o CMakeFiles/mission.dir/TimeoutSerial.cpp.s
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.o.requires:
+
+.PHONY : CMakeFiles/mission.dir/TimeoutSerial.cpp.o.requires
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.o.provides: CMakeFiles/mission.dir/TimeoutSerial.cpp.o.requires
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/TimeoutSerial.cpp.o.provides.build
+.PHONY : CMakeFiles/mission.dir/TimeoutSerial.cpp.o.provides
+
+CMakeFiles/mission.dir/TimeoutSerial.cpp.o.provides.build: CMakeFiles/mission.dir/TimeoutSerial.cpp.o
+
+
 CMakeFiles/mission.dir/ubridge.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/ubridge.cpp.o: ../ubridge.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mission.dir/ubridge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/mission.dir/ubridge.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/ubridge.cpp.o -c /home/local/mission/ubridge.cpp
 
 CMakeFiles/mission.dir/ubridge.cpp.i: cmake_force
@@ -155,7 +203,7 @@ CMakeFiles/mission.dir/ubridge.cpp.o.provides.build: CMakeFiles/mission.dir/ubri
 
 CMakeFiles/mission.dir/umission.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/umission.cpp.o: ../umission.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mission.dir/umission.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/mission.dir/umission.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/umission.cpp.o -c /home/local/mission/umission.cpp
 
 CMakeFiles/mission.dir/umission.cpp.i: cmake_force
@@ -179,7 +227,7 @@ CMakeFiles/mission.dir/umission.cpp.o.provides.build: CMakeFiles/mission.dir/umi
 
 CMakeFiles/mission.dir/utime.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/utime.cpp.o: ../utime.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/mission.dir/utime.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/mission.dir/utime.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/utime.cpp.o -c /home/local/mission/utime.cpp
 
 CMakeFiles/mission.dir/utime.cpp.i: cmake_force
@@ -203,7 +251,7 @@ CMakeFiles/mission.dir/utime.cpp.o.provides.build: CMakeFiles/mission.dir/utime.
 
 CMakeFiles/mission.dir/u2dline.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/u2dline.cpp.o: ../u2dline.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/mission.dir/u2dline.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/mission.dir/u2dline.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/u2dline.cpp.o -c /home/local/mission/u2dline.cpp
 
 CMakeFiles/mission.dir/u2dline.cpp.i: cmake_force
@@ -227,7 +275,7 @@ CMakeFiles/mission.dir/u2dline.cpp.o.provides.build: CMakeFiles/mission.dir/u2dl
 
 CMakeFiles/mission.dir/tcpCase.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/tcpCase.cpp.o: ../tcpCase.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/mission.dir/tcpCase.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/mission.dir/tcpCase.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/tcpCase.cpp.o -c /home/local/mission/tcpCase.cpp
 
 CMakeFiles/mission.dir/tcpCase.cpp.i: cmake_force
@@ -251,7 +299,7 @@ CMakeFiles/mission.dir/tcpCase.cpp.o.provides.build: CMakeFiles/mission.dir/tcpC
 
 CMakeFiles/mission.dir/uevent.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/uevent.cpp.o: ../uevent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/mission.dir/uevent.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/mission.dir/uevent.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/uevent.cpp.o -c /home/local/mission/uevent.cpp
 
 CMakeFiles/mission.dir/uevent.cpp.i: cmake_force
@@ -275,7 +323,7 @@ CMakeFiles/mission.dir/uevent.cpp.o.provides.build: CMakeFiles/mission.dir/ueven
 
 CMakeFiles/mission.dir/ujoy.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/ujoy.cpp.o: ../ujoy.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/mission.dir/ujoy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/mission.dir/ujoy.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/ujoy.cpp.o -c /home/local/mission/ujoy.cpp
 
 CMakeFiles/mission.dir/ujoy.cpp.i: cmake_force
@@ -299,7 +347,7 @@ CMakeFiles/mission.dir/ujoy.cpp.o.provides.build: CMakeFiles/mission.dir/ujoy.cp
 
 CMakeFiles/mission.dir/uinfo.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/uinfo.cpp.o: ../uinfo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/mission.dir/uinfo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/mission.dir/uinfo.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/uinfo.cpp.o -c /home/local/mission/uinfo.cpp
 
 CMakeFiles/mission.dir/uinfo.cpp.i: cmake_force
@@ -323,7 +371,7 @@ CMakeFiles/mission.dir/uinfo.cpp.o.provides.build: CMakeFiles/mission.dir/uinfo.
 
 CMakeFiles/mission.dir/umotor.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/umotor.cpp.o: ../umotor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/mission.dir/umotor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/mission.dir/umotor.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/umotor.cpp.o -c /home/local/mission/umotor.cpp
 
 CMakeFiles/mission.dir/umotor.cpp.i: cmake_force
@@ -347,7 +395,7 @@ CMakeFiles/mission.dir/umotor.cpp.o.provides.build: CMakeFiles/mission.dir/umoto
 
 CMakeFiles/mission.dir/uedge.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/uedge.cpp.o: ../uedge.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/mission.dir/uedge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/mission.dir/uedge.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/uedge.cpp.o -c /home/local/mission/uedge.cpp
 
 CMakeFiles/mission.dir/uedge.cpp.i: cmake_force
@@ -371,7 +419,7 @@ CMakeFiles/mission.dir/uedge.cpp.o.provides.build: CMakeFiles/mission.dir/uedge.
 
 CMakeFiles/mission.dir/upose.cpp.o: CMakeFiles/mission.dir/flags.make
 CMakeFiles/mission.dir/upose.cpp.o: ../upose.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/mission.dir/upose.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/mission.dir/upose.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mission.dir/upose.cpp.o -c /home/local/mission/upose.cpp
 
 CMakeFiles/mission.dir/upose.cpp.i: cmake_force
@@ -398,6 +446,8 @@ mission_OBJECTS = \
 "CMakeFiles/mission.dir/main.cpp.o" \
 "CMakeFiles/mission.dir/urun.cpp.o" \
 "CMakeFiles/mission.dir/ucamera.cpp.o" \
+"CMakeFiles/mission.dir/ujevois.cpp.o" \
+"CMakeFiles/mission.dir/TimeoutSerial.cpp.o" \
 "CMakeFiles/mission.dir/ubridge.cpp.o" \
 "CMakeFiles/mission.dir/umission.cpp.o" \
 "CMakeFiles/mission.dir/utime.cpp.o" \
@@ -416,6 +466,8 @@ mission_EXTERNAL_OBJECTS =
 mission: CMakeFiles/mission.dir/main.cpp.o
 mission: CMakeFiles/mission.dir/urun.cpp.o
 mission: CMakeFiles/mission.dir/ucamera.cpp.o
+mission: CMakeFiles/mission.dir/ujevois.cpp.o
+mission: CMakeFiles/mission.dir/TimeoutSerial.cpp.o
 mission: CMakeFiles/mission.dir/ubridge.cpp.o
 mission: CMakeFiles/mission.dir/umission.cpp.o
 mission: CMakeFiles/mission.dir/utime.cpp.o
@@ -477,7 +529,7 @@ mission: /usr/local/lib/libopencv_photo.so.3.4.5
 mission: /usr/local/lib/libopencv_imgproc.so.3.4.5
 mission: /usr/local/lib/libopencv_core.so.3.4.5
 mission: CMakeFiles/mission.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable mission"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/local/mission/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable mission"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mission.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -488,6 +540,8 @@ CMakeFiles/mission.dir/build: mission
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/main.cpp.o.requires
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/urun.cpp.o.requires
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/ucamera.cpp.o.requires
+CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/ujevois.cpp.o.requires
+CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/TimeoutSerial.cpp.o.requires
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/ubridge.cpp.o.requires
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/umission.cpp.o.requires
 CMakeFiles/mission.dir/requires: CMakeFiles/mission.dir/utime.cpp.o.requires

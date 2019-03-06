@@ -6,6 +6,26 @@
 
 #IncludeRegexTransform: 
 
+/home/local/mission/TimeoutSerial.cpp
+TimeoutSerial.h
+/home/local/mission/TimeoutSerial.h
+string
+-
+algorithm
+-
+iostream
+-
+boost/bind.hpp
+-
+
+/home/local/mission/TimeoutSerial.h
+stdexcept
+-
+boost/utility.hpp
+-
+boost/asio.hpp
+-
+
 /home/local/mission/main.cpp
 iostream
 -
@@ -35,6 +55,8 @@ opencv2/core/core.hpp
 -
 opencv2/highgui/highgui.hpp
 -
+ujevois.h
+/home/local/mission/ujevois.h
 raspicam/raspicam.h
 -
 urun.h
@@ -187,6 +209,20 @@ ubridge.h
 /home/local/mission/uinfo.cpp
 ubridge.h
 /home/local/mission/ubridge.h
+
+/home/local/mission/ujevois.cpp
+ujevois.h
+/home/local/mission/ujevois.h
+string
+-
+
+/home/local/mission/ujevois.h
+iostream
+-
+TimeoutSerial.h
+/home/local/mission/TimeoutSerial.h
+stdlib.h
+-
 
 /home/local/mission/ujoy.cpp
 ubridge.h
