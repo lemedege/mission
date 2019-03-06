@@ -44,6 +44,7 @@
 #include "ucamera.h"
 #include "ubridge.h"
 #include "umission.h"
+#include "ujevois.h"
 // #include "ujoy.h"
 
 using namespace std;
