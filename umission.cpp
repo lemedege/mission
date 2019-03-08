@@ -235,16 +235,11 @@ void UMission::runMission()
         case 1: // running auto mission
 //           printf("Mission:: starting mission 1, state=%d, running=%d, line=%d, thread=%d\n", 
 //                  missionState, bot->info.missionRunning, bot->info.missionLineNum, bot->info.missionThread);
-          ended = mission1(missionState);
+          ended = mission3(missionState);
           if (wait4running and not running and bot->info->missionRunning)
             running = true;
           break;
-        case 2:
-          ended = mission2(missionState);
-          break;
-        case 3:
-          ended = mission3(missionState);
-          break;  
+      
           
         default:
           finished = true;
@@ -365,38 +360,105 @@ bool UMission::mission3(int & state)
   // run the desired mission
   switch (state)
   {
-    case 0: // first PART 
+    case 0: // Gullutione port + ramp up  
        printf("running mission part 3\n"); 
-      snprintf(lines[0], MAX_LEN, "vel=0.4,acc=1.0,edger=1.0,white=1:dist=5");
-      snprintf(lines[1], MAX_LEN, "vel=0.0:dist=1,time=10"); //non-ending line
+      snprintf(lines[0], MAX_LEN, "vel=0.4, acc=-1.0, edgel=2.0, white=1: xl>16");
       // last line should never end, as robot then think we are finished
       // so therefore a timeout of 1 second, to allow next set of
       // commands to be delivered
-      snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-      missionSendAndRun(lineList, 3);
+      snprintf(lines[1], MAX_LEN, "event=1:time=1.1");
+      missionSendAndRun(lineList, 2);
       state++;
       break;
-    case 1:
+    case 1: //Gullutione port + ramp up 
       if (bot->event->eventSet(1))
       { // finished first drive
         state = 10;
 //         printf("mission finished first part\n");
       }
       break;
-    case 10: // go back to start position and stop
-      snprintf(lines[0], MAX_LEN, ": dist=0.6");
-      snprintf(lines[1], MAX_LEN, "tr=0.05:turn=90,time=10");
-      snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-      missionSendAndRun(lineList, 3);
+    case 10: // Tilt ramp
+      snprintf(lines[0], MAX_LEN, "tr=0.125,vel=0.5,acc=2:turn=90,time=10");
+      snprintf(lines[1], MAX_LEN, "vel=0.3, acc=-1.0, edgel=0.0, white=1:dist=1");
+	  snprintf(lines[2], MAX_LEN, "vel=0.1,acc=10,edgel=0,white=1:lv=0");
+	  snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=2");
+      snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+      missionSendAndRun(lineList, 5);
       state++;        
       break;
-    case 11:
+    case 11:// Tilt ramp
       if (bot->event->eventSet(1))
       { // finished
         state = 20;
         printf("mission ended\n");
       }
       break;
+	case 20: // find white line før ramp down
+		snprintf(lines[0], MAX_LEN, "tr=0.8,vel=0.5,acc=2:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
+		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[3], MAX_LEN, "tr=0.05,vel=0.4,acc=1:turn=-90");
+		snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 5);
+		state++;
+		break;
+	case 21:// find white line før ramp down
+		if (bot->event->eventSet(1))
+		{ // finished
+			state = 30;
+			printf("mission ended\n");
+		}
+		break;
+	case 30: //  ramp down kør op af 
+		snprintf(lines[0], MAX_LEN, "vel=0.6,acc=10,edger=1.0:dist=2.9");
+		snprintf(lines[1], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[2], MAX_LEN, "vel=0.4,acc=2,edger=1.0,white=1:xl>6");
+		snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 4);
+		state++;
+		break;
+	case 31://  ramp down kør op af
+		if (bot->event->eventSet(1))
+		{ // finished
+			state = 40;
+			printf("mission ended\n");
+		}
+		break;
+	case 40: // trappe ned
+		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.23");
+		snprintf(lines[1], MAX_LEN, "tr=-0.01,vel=0.5,acc=2:turn=-180");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=1,edgel=2.0,white=1:dist=0.2");
+		snprintf(lines[3], MAX_LEN, "vel=0.1,acc=5,edgel=0.0,white=1:dist=2");
+		snprintf(lines[4], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[5], MAX_LEN, "vel=0.1,acc=10,edgel=0,white=1:lv=0");
+		snprintf(lines[6], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 7);
+		state++;
+		break;
+	case 41:// trappe ned 
+		if (bot->event->eventSet(1))
+		{ // finished
+			state = 50;
+			printf("mission ended\n");
+		}
+		break;
+	case 50: // goal
+		snprintf(lines[0], MAX_LEN, "tr=0.12,vel=0.4,acc=1:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>12");
+		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[3], MAX_LEN, "tr=0.00,vel=0.4,acc=1:turn=90");
+		snprintf(lines[4], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
+		snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 6);
+		state++;
+		break;
+	case 51:// goal 
+		if (bot->event->eventSet(1))
+		{ // finished
+			state = 999;
+			printf("mission ended\n");
+		}
+		break;
     case 999:
     default:
       finished = true;
