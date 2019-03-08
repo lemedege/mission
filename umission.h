@@ -50,7 +50,7 @@ private:
   // thread on Regbot
   int threadActive = false;
   /// space for fabricated lines
-  const static int MAX_LINES = 5;
+  const static int MAX_LINES = 10;
   const static int MAX_LEN = 100;
   char lines[MAX_LINES][MAX_LEN];
   // make an array of pointers to mission lines
