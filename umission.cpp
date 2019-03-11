@@ -393,7 +393,7 @@ bool UMission::mission3(int & state)
         printf("mission ended\n");
       }
       break;
-	case 20: // find white line før ramp down
+	case 20: // find white line fï¿½r ramp down
 		snprintf(lines[0], MAX_LEN, "tr=0.8,vel=0.5,acc=2:turn=-90");
 		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
 		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=2");
@@ -402,14 +402,14 @@ bool UMission::mission3(int & state)
 		missionSendAndRun(lineList, 5);
 		state++;
 		break;
-	case 21:// find white line før ramp down
+	case 21:// find white line fï¿½r ramp down
 		if (bot->event->eventSet(1))
 		{ // finished
 			state = 30;
 			printf("mission ended\n");
 		}
 		break;
-	case 30: //  ramp down kør op af 
+	case 30: //  ramp down kï¿½r op af 
 		snprintf(lines[0], MAX_LEN, "vel=0.6,acc=10,edger=1.0:dist=2.9");
 		snprintf(lines[1], MAX_LEN, "vel=0,acc=100:time=1");
 		snprintf(lines[2], MAX_LEN, "vel=0.4,acc=2,edger=1.0,white=1:xl>6");
@@ -417,7 +417,7 @@ bool UMission::mission3(int & state)
 		missionSendAndRun(lineList, 4);
 		state++;
 		break;
-	case 31://  ramp down kør op af
+	case 31://  ramp down kï¿½r op af
 		if (bot->event->eventSet(1))
 		{ // finished
 			state = 40;
@@ -470,3 +470,56 @@ bool UMission::mission3(int & state)
 
 
 
+
+
+
+
+
+bool UMission::setControlParameters(int & state)
+{
+  bool finished = false;
+  // First commands to send to robobot in given mission
+  // (robot sends event 1 after driving 1 meter)):
+  //
+//   float startDist = bot->dist;
+  // Primary loop for robobot mission:
+  // run the desired mission
+  switch (state)
+  {
+    case 0: // first PART 
+    bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06"); //set racing line-parameters
+   // bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06"); //set normal line-parameters
+  
+      // last line should never end, as robot then think we are finished
+      // so therefore a timeout of 1 second, to allow next set of
+      // commands to be delivered
+      snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+      missionSendAndRun(lineList, 1);
+      state++;
+      break;
+    case 1:
+      if (bot->event->eventSet(1))
+      { // finished first drive
+        state = 10;
+//         printf("mission finished first part\n");
+      }
+      break;
+    case 10: // go back to start position and stop
+      snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+      missionSendAndRun(lineList, 1);
+      state++;        
+      break;
+    case 11:
+      if (bot->event->eventSet(1))
+      { // finished
+        state = 20;
+        printf("mission ended\n");
+      }
+      break;
+    case 999:
+    default:
+      finished = true;
+      break;
+  }
+  return finished;
+}
