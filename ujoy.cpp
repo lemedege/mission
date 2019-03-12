@@ -21,7 +21,7 @@
 #include "ubridge.h"
 
 
-UJoy::UJoy(UBridge * bridge_ptr)
+UJoy::UJoy(UBridge * bridge_ptr, bool openLog)
 {
   bridge = bridge_ptr;
 }

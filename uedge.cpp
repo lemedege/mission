@@ -20,7 +20,7 @@
 
 #include "ubridge.h"
 
-UEdge::UEdge(UBridge * bridge_ptr)
+UEdge::UEdge(UBridge * bridge_ptr, bool openLog)
 {
   bridge = bridge_ptr;
 }

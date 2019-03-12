@@ -20,20 +20,54 @@
 
 #include "ubridge.h"
 
-UEvent::UEvent(UBridge * bridge_ptr)
+UEvent::UEvent(UBridge * bridge_ptr, bool openlog)
 {
   clearEvents();
   bridge = bridge_ptr;
+  if (openlog)
+    openLog();
 }
+
+void UEvent::openLog()
+{ // open pose log
+  const int MNL = 100;
+  char date[MNL];
+  char name[MNL];
+  UTime time;
+  time.now();
+  time.getForFilename(date);
+  snprintf(name, MNL, "log_event_%s.txt", date);
+  logfile = fopen(name, "w");
+  if (logfile != NULL)
+  {
+    fprintf(logfile, "%% robobot IR distance log\n");
+    fprintf(logfile, "%% 1 Timestamp in seconds\n");
+    fprintf(logfile, "%% 2 event set (-1=not set)\n");
+    fprintf(logfile, "%% 3 event cleared (-1=not cleared)\n");
+  }
+}
+
+
 //
 void UEvent::decode(char * msg)
 { // "event 33"
   // skip the first 5 characters
   char * p1 = &msg[5];
   int eventNumber = strtol(p1, &p1,0);
-  setEvent(eventNumber);
+  // if first event is 0, then it is result of last mission
+  // still maintained in bridge - just ignore
+  if (eventNumber > 0 or not firstEvent)
+  {
+    setEvent(eventNumber);
+    firstEvent = false;
+  }
+  updated();
   // debug
-  printf("# got event %d: %s\n", eventNumber, msg);
+  printf("# got event %d: '%s'\n", eventNumber, msg);
+  if (logfile != NULL)
+  {
+    fprintf(logfile, "%ld.%03ld %2d -1\n", dataTime.tv_sec, dataTime.tv_usec / 1000, eventNumber);
+  }
 }
 /** set event flag */
 void UEvent::setEvent(int eventNumber)
@@ -41,7 +75,7 @@ void UEvent::setEvent(int eventNumber)
   if (eventNumber < MAX_EVENT_FLAGS and eventNumber >= 0)
   { // event 33 is start button, event 0 is misson stop
     eventUpdate.lock();
-    printf("# Event received: %d\n", eventNumber);
+    //printf("# Event received: %d\n", eventNumber);
     eventFlags[eventNumber] = true;
     eventUpdate.unlock();
   }
@@ -62,29 +96,21 @@ bool UEvent::eventSet ( int event )
   bool set = false;
   if (event <= MAX_EVENT_FLAGS and event >= 0)
   { // make sure it is not updated between test and set
-    //       bool events = false;
-    //       for (int i = 0; i < MAX_EVENT_FLAGS; i++)
-    //       {
-    //         if (eventFlags[i] != 0)
-    //         {
-    //           events=true;
-    //           if (event > 0)
-    //             printf("UEvent::eventSet:: - looking for %d, event=%d is set\n", event, i);
-    //         }
-    //       }
-    //       if (events)
-    { // test and clear event
-      eventUpdate.lock();
-      set = eventFlags[event];
-      eventFlags[event] = 0;
-      eventUpdate.unlock();
+    eventUpdate.lock();
+    set = eventFlags[event];
+    eventFlags[event] = 0;
+    updated();
+    eventUpdate.unlock();
+    if (logfile != NULL and set)
+    { // flag is cleared - put in log
+      fprintf(logfile, "%ld.%03ld -1 %2d\n", dataTime.tv_sec, dataTime.tv_usec / 1000, event);
     }
   }
   return set;
 }
 
 void UEvent::subscribe()
-{
+{ // subscribe to data from bridge
   clearEvents();
   bridge->send("event subscribe 6\n"); // start, stop and mission events
   bridge->send("event get\n"); // start, stop and mission events

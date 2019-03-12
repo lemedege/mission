@@ -21,39 +21,33 @@
 #include "ubridge.h"
 
 
-UPose::UPose(UBridge * bridge_ptr)
+UPose::UPose(UBridge * bridge_ptr, bool openlog)
 {
   bridge = bridge_ptr;
-  if (false)
-  { // open pose log
-    const int MNL = 100;
-    char date[MNL];
-    char name[MNL];
-    UTime time;
-    time.now();
-    time.getForFilename(date);
-    snprintf(name, MNL, "log_odometry_%s.txt", date);
-    poselog = fopen(name, "w");
-    if (poselog != NULL)
-    {
-      fprintf(poselog, "%% robobot poselog\n");
-      fprintf(poselog, "%% 1 Timestamp in seconds\n");
-      fprintf(poselog, "%% 2 x (forward)\n");
-      fprintf(poselog, "%% 3 y (left)\n");
-      fprintf(poselog, "%% 4 h (heading in radians)\n");
-    }
+  if (openlog)
+    openLog();
+}
+
+
+void UPose::openLog()
+{ // open pose log
+  const int MNL = 100;
+  char date[MNL];
+  char name[MNL];
+  UTime time;
+  time.now();
+  time.getForFilename(date);
+  snprintf(name, MNL, "log_odometry_%s.txt", date);
+  logfile = fopen(name, "w");
+  if (logfile != NULL)
+  {
+    fprintf(logfile, "%% robobot logfile\n");
+    fprintf(logfile, "%% 1 Timestamp in seconds\n");
+    fprintf(logfile, "%% 2 x (forward)\n");
+    fprintf(logfile, "%% 3 y (left)\n");
+    fprintf(logfile, "%% 4 h (heading in radians)\n");
   }
-  else
-    poselog = NULL;
 }
-
-
-UPose::~UPose()
-{
-  if (poselog != NULL)
-    fclose(poselog);
-}
-//
 
 void UPose::decode(char * msg)
 { // assuming msg = "pse ..."
@@ -63,11 +57,11 @@ void UPose::decode(char * msg)
   y = strtof(p1, &p1);
   h = strtof(p1, &p1);
   dist += hypot(x - x2, y - y2);
-  if (poselog != NULL)
+  if (logfile != NULL)
   {
     UTime t;
     t.now();
-    fprintf(poselog, "%ld.%03ld %.3f %.3f %.4f\n", t.getSec(), t.getMilisec(), x, y, h);
+    fprintf(logfile, "%ld.%03ld %.3f %.3f %.4f\n", t.getSec(), t.getMilisec(), x, y, h);
   }
 }
 

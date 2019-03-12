@@ -51,6 +51,13 @@ class UData
 public:
   timeval dataTime;
   UBridge * bridge = NULL;
+  FILE * logfile = NULL;
+  /** destructor  */
+  ~UData()
+  { // make sure file is closed
+    if (logfile != NULL)
+      fclose(logfile);
+  }
   // set update time
   void updated()
   {
@@ -74,6 +81,40 @@ public:
 };
 
 /**
+ * base class for data items from IR distance sensor */
+class UIRdist : public UData
+{
+public:
+  float dist[2] = {0,0};
+  int raw[2] = {0,0};
+  // constructor
+  UIRdist(UBridge * bridge_ptr, bool openLog);
+  //
+  void decode(char * msg);
+  //
+  virtual void subscribe();
+  // open logfile for all updates
+  void openLog();
+};
+
+/**
+ * base class for data items from Accelerometer and Gyro */
+class UAccGyro : public UData
+{
+public:
+  float acc[3] = {0};
+  float gyro[3] = {0};
+  // constructor
+  UAccGyro(UBridge * bridge_ptr, bool openLog);
+  //
+  void decode(char * msg);
+  //
+  virtual void subscribe();
+  // open logfile for all updates
+  void openLog();
+};
+
+/**
  * robot pose info */
 class UPose : public UData
 {
@@ -81,16 +122,16 @@ public:
   float x = 0.0;
   float y = 0.0;
   float h = 0.0;
+  float tilt = 0.0;
   float dist = 0.0;
-  FILE * poselog;
   // constructor
-  UPose(UBridge * bridge_ptr);
-  // destructor 
-  ~UPose();
+  UPose(UBridge * bridge_ptr, bool openLog);
   //
   void decode(char * msg);
   //
   virtual void subscribe();
+  // open logfile
+  void openLog();
 };
 
 /////////////////////////////////////////////////////////////
@@ -106,7 +147,7 @@ public:
   bool edgeCrossingBlack = false;
   bool edgeCrossingWhite = false;
   //
-  UEdge(UBridge * bridge_ptr);
+  UEdge(UBridge * bridge_ptr, bool openLog);
   void decode(char * msg);
   void subscribe() override;
   
@@ -125,8 +166,22 @@ public:
   bool missionRunning = false;
   int missionLineNum = 0;
   int missionThread = 0;
+  // basic robot info
+  int robotId; 
+  float odoWheelBase; // meter
+  float gear;         // ratio
+  int   pulsPerRev;   // on motor encoder
+  float odoWheelRadius[2]; // in meter
+  float balanceOffset; // offset to balance
+  bool  batteryUse;    // running on battery
+  float batteryIdleVoltage; // Volts, vhen robot turns off
+  int   robotHWversion;  // hardware configuration 1..6
+  static const int MAX_NAME_LENGTH = 32;
+  char robotname[MAX_NAME_LENGTH];
+  
   // methods
-  UInfo(UBridge * bridge_ptr);
+  UInfo(UBridge * bridge_ptr, bool openLog);
+  void decodeId(char * msg);
   void decodeHbt(char * msg);
   void decodeMission(char * msg);
   float getTime();
@@ -143,12 +198,15 @@ public:
   static const int MAX_EVENT_FLAGS = 34;
   bool eventFlags[MAX_EVENT_FLAGS];
   mutex eventUpdate;
+  bool firstEvent = true;
   
-  UEvent(UBridge * bridge_ptr);
+  UEvent(UBridge * bridge_ptr, bool openLog);
   //
   void decode(char * msg);
   /** set event flag */
   void setEvent(int eventNumber);
+  // open logfile
+  void openLog();
   /**
    * Clear all event flags to false */
   void clearEvents();
@@ -179,7 +237,7 @@ public:
   // first 4 is [0]=green, [1]=red, [2]=blue, [3]=yellow
   bool manual = false;
   
-  UJoy(UBridge * bridge_ptr);
+  UJoy(UBridge * bridge_ptr, bool openLog);
   //
   void decode(char * msg);
   
@@ -194,7 +252,7 @@ public:
   float velocity[2];
   float current[2];
   
-  UMotor(UBridge * bridge_ptr);
+  UMotor(UBridge * bridge_ptr, bool openLog);
   //
   void decodeVel(char * msg);
   void decodeCurrent(char * msg);
@@ -214,20 +272,23 @@ class UBridge : public URun, public tcpCase
 { // REGBOT interface
 public:
   // data items
-  UPose * pose = new UPose(this);
-  UEdge * edge = new UEdge(this);
-  UInfo * info = new UInfo(this);
-  UEvent * event = new UEvent(this);
-  UJoy * joy = new UJoy(this);
-  UMotor * motor = new UMotor(this);
+  // the second parameter is 
+  UPose * pose = new UPose(this, false);
+  UEdge * edge = new UEdge(this, false);
+  UInfo * info = new UInfo(this, false);
+  UEvent * event = new UEvent(this, false);
+  UJoy * joy = new UJoy(this, false);
+  UMotor * motor = new UMotor(this, false);
+  UIRdist * irdist = new UIRdist(this, false);
+  UAccGyro * accgyro = new UAccGyro(this, false);
   // debug log
   FILE * botlog;
   
 private:
   // read thread handle
-  thread * th1;
+//   thread * th1;
   // set true to stop thread
-  bool th1stop;
+//   bool th1stop;
   // mutex to ensure commands to regbot is not mixed
   mutex sendMtx;
   mutex logMtx;
@@ -246,7 +307,7 @@ public:
    * \param server is a string with either IP address or hostname.
    * connects to port 24001
    */
-  UBridge(const char * server);
+  UBridge(const char * server, bool openLog);
   /** destructor */
   ~UBridge();
   /**
