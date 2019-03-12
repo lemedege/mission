@@ -34,7 +34,7 @@ UMission::UMission(UBridge * regbot, UCamera * camera)
   threadActive = 100;
   // initialize line list to empty
   for (int i = 0; i < MAX_LINES; i++)
-  { // terminate c-strings strings - good practice, but not needed
+_  { // terminate c-strings strings - good practice, but not needed
     lines[i][0] = '\0';
     // add to line list 
     lineList[i] = lines[i];    
@@ -349,7 +349,7 @@ bool UMission::mission1(int & state)
  *              therefore defined as reference with the '&'.
  *              State will be 0 at first call.
  * \returns true, when finished. */
-bool UMission::mission3(int & state)
+bool UMission::sendControlParameters(int & state)
 {
   bool finished = false;
   // First commands to send to robobot in given mission
@@ -487,7 +487,7 @@ bool UMission::setControlParameters(int & state)
   switch (state)
   {
     case 0: // first PART 
-    bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06"); //set racing line-parameters
+    bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06"); //set racing line-parameters
   
       // last line should never end, as robot then think we are finished
       // so therefore a timeout of 1 second, to allow next set of
