@@ -111,7 +111,9 @@ private:
   bool mission3(int & state);
 
 
-  bool setControlParameters(int & state);
+  bool setRacing(int & state);
+
+  bool setNormal(int & state);
 
 private:
   void missionSendAndRun(const char * missionLines[], int missionLineCnt);
