@@ -486,11 +486,19 @@ bool UMission::setRacing(int & state)
   switch (state)
   {
     case 0: // first PART 
-    bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n"); //set racing line-parameters
-  
-      state=999;
+    bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
+    snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 1);
+      state++;
+      
       break;
-   
+
+         if (bot->event->eventSet(1))
+      { // finished first drive
+        state = 999;
+//         printf("mission finished first part\n");
+      }
+
     case 999:
     default:
       finished = true;
@@ -506,10 +514,18 @@ bool UMission::setNormal(int & state)
   switch (state)
   {
     case 0: // first PART 
-    bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n"); //set normal line-parameters
-  
-      state=999;
+    bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+    snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 1);
+
+      state++;
       break;
+
+         if (bot->event->eventSet(1))
+      { // finished first drive
+        state = 999;
+//         printf("mission finished first part\n");
+      }
     case 999:
     default:
       finished = true;
