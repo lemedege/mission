@@ -349,7 +349,7 @@ bool UMission::mission1(int & state)
  *              therefore defined as reference with the '&'.
  *              State will be 0 at first call.
  * \returns true, when finished. */
-bool UMission::mission3(int & state)
+bool UMission::sendControlParameters(int & state)
 {
   bool finished = false;
   // First commands to send to robobot in given mission
