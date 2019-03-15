@@ -285,6 +285,12 @@ CMakeFiles/mission.dir/u2dline.cpp.o
  /usr/local/include/opencv2/videostab/stabilizer.hpp
  /usr/local/include/opencv2/videostab/wobble_suppression.hpp
  /usr/local/include/opencv2/xfeatures2d/cuda.hpp
+CMakeFiles/mission.dir/uaccgyro.cpp.o
+ /home/local/mission/tcpCase.h
+ /home/local/mission/uaccgyro.cpp
+ /home/local/mission/ubridge.h
+ /home/local/mission/urun.h
+ /home/local/mission/utime.h
 CMakeFiles/mission.dir/ubridge.cpp.o
  /home/local/mission/tcpCase.h
  /home/local/mission/ubridge.cpp
@@ -448,6 +454,12 @@ CMakeFiles/mission.dir/uinfo.cpp.o
  /home/local/mission/tcpCase.h
  /home/local/mission/ubridge.h
  /home/local/mission/uinfo.cpp
+ /home/local/mission/urun.h
+ /home/local/mission/utime.h
+CMakeFiles/mission.dir/uirdist.cpp.o
+ /home/local/mission/tcpCase.h
+ /home/local/mission/ubridge.h
+ /home/local/mission/uirdist.cpp
  /home/local/mission/urun.h
  /home/local/mission/utime.h
 CMakeFiles/mission.dir/ujevois.cpp.o

@@ -285,6 +285,12 @@ CMakeFiles/mission.dir/u2dline.cpp.o: /usr/local/include/opencv2/videostab/stabi
 CMakeFiles/mission.dir/u2dline.cpp.o: /usr/local/include/opencv2/videostab/wobble_suppression.hpp
 CMakeFiles/mission.dir/u2dline.cpp.o: /usr/local/include/opencv2/xfeatures2d/cuda.hpp
 
+CMakeFiles/mission.dir/uaccgyro.cpp.o: ../tcpCase.h
+CMakeFiles/mission.dir/uaccgyro.cpp.o: ../uaccgyro.cpp
+CMakeFiles/mission.dir/uaccgyro.cpp.o: ../ubridge.h
+CMakeFiles/mission.dir/uaccgyro.cpp.o: ../urun.h
+CMakeFiles/mission.dir/uaccgyro.cpp.o: ../utime.h
+
 CMakeFiles/mission.dir/ubridge.cpp.o: ../tcpCase.h
 CMakeFiles/mission.dir/ubridge.cpp.o: ../ubridge.cpp
 CMakeFiles/mission.dir/ubridge.cpp.o: ../ubridge.h
@@ -449,6 +455,12 @@ CMakeFiles/mission.dir/uinfo.cpp.o: ../ubridge.h
 CMakeFiles/mission.dir/uinfo.cpp.o: ../uinfo.cpp
 CMakeFiles/mission.dir/uinfo.cpp.o: ../urun.h
 CMakeFiles/mission.dir/uinfo.cpp.o: ../utime.h
+
+CMakeFiles/mission.dir/uirdist.cpp.o: ../tcpCase.h
+CMakeFiles/mission.dir/uirdist.cpp.o: ../ubridge.h
+CMakeFiles/mission.dir/uirdist.cpp.o: ../uirdist.cpp
+CMakeFiles/mission.dir/uirdist.cpp.o: ../urun.h
+CMakeFiles/mission.dir/uirdist.cpp.o: ../utime.h
 
 CMakeFiles/mission.dir/ujevois.cpp.o: ../TimeoutSerial.h
 CMakeFiles/mission.dir/ujevois.cpp.o: ../ujevois.cpp

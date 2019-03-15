@@ -114,6 +114,10 @@ math.h
 opencv2/opencv.hpp
 -
 
+/home/local/mission/uaccgyro.cpp
+ubridge.h
+/home/local/mission/ubridge.h
+
 /home/local/mission/ubridge.cpp
 sys/time.h
 -
@@ -207,6 +211,12 @@ ubridge.h
 /home/local/mission/ubridge.h
 
 /home/local/mission/uinfo.cpp
+string.h
+-
+ubridge.h
+/home/local/mission/ubridge.h
+
+/home/local/mission/uirdist.cpp
 ubridge.h
 /home/local/mission/ubridge.h
 
