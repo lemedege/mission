@@ -22,7 +22,7 @@
 
 
 
-UMotor::UMotor(UBridge * bridge_ptr)
+UMotor::UMotor(UBridge * bridge_ptr, bool openLog)
 {
   bridge = bridge_ptr;
 }

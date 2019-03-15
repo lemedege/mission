@@ -33,7 +33,7 @@ UMission::UMission(UBridge * regbot, UCamera * camera)
   bot = regbot;
   threadActive = 100;
   // initialize line list to empty
-  for (int i = 0; i < MAX_LINES; i++)
+  for (int i = 0; i < missionLineMax; i++)
   { // terminate c-strings strings - good practice, but not needed
     lines[i][0] = '\0';
     // add to line list 
@@ -41,7 +41,6 @@ UMission::UMission(UBridge * regbot, UCamera * camera)
   }
   // start mission thread
   th1 = new thread(runObj, this);
-  
 }
 
 
@@ -50,29 +49,22 @@ UMission::~UMission()
   printf("Mission class finished\n");
 }
 
-// typedef enum  {
-//   MSG_HART_BEAT,
-//   MSG_POSE,
-//   MSG_IR,
-//   MSG_EDGE,
-//   MSG_ACC,
-//   MSG_GYRO,
-//   MSG_MOTOR_CURRENT,
-//   MSG_WHEEL_VEL,
-//   MSG_MAX} MESSAGE_TYPES;
-  
 
 void UMission::run()
 {
   while (not active and not th1stop)
     usleep(100000);
+  printf("UMission::run:  active=%d, th1stop=%d\n", active, th1stop);
   if (not th1stop)
     runMission();
-  printf("mission thread ended\n");
+  printf("UMission::run: mission thread ended\n");
 }
   
   
-  
+/**
+ * Initializes the communication with the robobot_bridge and the REGBOT.
+ * It further initializes a (maximum) number of mission lines 
+ * in the REGBOT microprocessor. */
 void UMission::missionInit()
 { // stop any not-finished mission
   bot->send("robot stop\n");
@@ -88,7 +80,6 @@ void UMission::missionInit()
   /* idle thread */
   bot->send("robot <add thread=1\n");
   // Irsensor should be activated a good time before use 
-//   printf("UMission::missionInit 3\n");
   // otherwise first samples will produce "false" positive (too short/negative).
   bot->send("robot <add irsensor=1,vel=0:dist=0.2\n");
   //
@@ -98,25 +89,36 @@ void UMission::missionInit()
     // send placeholder lines, that will never finish
     // are to be replaced with real mission
     // NB - hereafter no lines can be added to these threads, just modified
-    bot->send("robot <add vel=0 : time=1\n");
+    bot->send("robot <add vel=0 : time=0.1\n");
   //
   bot->send("robot <add thread=101,event=31 : event=30\n");
   for (int i = 0; i < missionLineMax; i++)
     // send placeholder lines, that will never finish
-    bot->send("robot <add vel=0\n");
+    bot->send("robot <add vel=0 : time=0.1\n");
   usleep(10000);
   //
   printf("UMission::missionInit: base mission loaded\n");
   //
-  // send subscribe to bridge to the same data (priority [1..4] 1 is fastest, 6 is when new data is available)
+  //
+  //
+  // send subscribe to bridge
   bot->pose->subscribe();
+//  bot->pose->openLog();       // <--- NB uses diskspace
   bot->edge->subscribe();
   bot->motor->subscribe();
   bot->event->subscribe();
+//  bot->event->openLog();       // <--- NB uses diskspace
   bot->joy->subscribe();
   bot->motor->subscribe();
   bot->info->subscribe();
-  // wait a bit for message streams to start
+  bot->irdist->subscribe();
+//  bot->irdist->openLog();       // <--- NB uses diskspace
+  bot->accgyro->subscribe();
+//  bot->accgyro->openLog();       // <--- NB uses diskspace
+    // open log in bridge with communication to and 
+    // from the REGBOT. 
+    // Log should be in robobot_bridge/build
+//   bot->send("robot clogopen\n"); // <--- NB uses diskspace
 }
 
 
@@ -128,7 +130,7 @@ void UMission::missionSendAndRun(const char ** missionLines, int missionLineCnt)
   char s[MSL];
   int threadToMod = 101;
   int startEvent = 31;
-  bot->event->clearEvents();
+//   bot->event->clearEvents();
   if (threadActive == 101)
   {
     threadToMod = 100;
@@ -162,82 +164,43 @@ void UMission::runMission()
 {
   int mission = fromMission;
   int state = 0;
-  bool started = false;
-  bool wait4running = true;
-  bool running = false;
   bool ended = false;
+  bool inManuel = false;
   int loop = 0;
-  UTime t;
-  int missionState = 0, missionStateOld = 0;;
+  int missionState = 0;
   // initialize robot mission to do nothing (wait for mission lines)
   missionInit();
-  sleep(1);
-  t.now();
-  printf("%ld.%06ld before start\n", t.getSec(), t.getMilisec());
   bot->send("start\n"); // ask robot to start controlled run (ready to execute)
   while (not finished and not th1stop)
-  {
+  { // stay in this mission loop until finished
     loop++;
-    // handle joystick control
-//     inManualControl = joy->testJoy(inManualControl);
-    // manuel RC control is in state 0
-    if (bot->joy->button[1] and not cam->saveImage)
-    { // red button 
-      printf("UMission::runMission:: button 1 (red) save image\n");
-      cam->saveImage = true;
-    }
     if (bot->joy->manual)
     { // just wait, do not continue mission
       usleep(20000);
+      if (not inManuel)
+        system("espeak \"Mission paused.\" -ven+f4 -s130 -a60 2>/dev/null &"); 
+      inManuel = true;
     }
     else
-    { // in auto mode, so start or continue
+    { // in auto mode
+      if (inManuel)
+      { // just entered auto mode, so tell.
+        inManuel = false;
+        system("espeak \"Mission resuming.\" -ven+f4 -s130 -a60 2>/dev/null &"); 
+      }
       switch(state)
       {
         case 0: // waiting for start button or manual control
           // (button 0=green, 1=red, blue=2, yellow=3, start=7, back=6, LB=4, RB=5
-//           if (bot->joy.button[1])
-//           { // red button 
-//             printf("UMission::runMission:: button 1 (red)\n");
-//             cam->saveImage = true;
-//           }
-          // manual control flag (from bridge)
-          if (bot->joy->manual)
-          { // do nothing here - mission is paused (or not started)
-  //           printf("Mission:: manual control\n");
-            usleep(20000);
-          }
-          else if (started)
-          { // resuming paused mission
-            state = mission;
-            printf("Mission:: resuming mission %d (until %d)\n", mission, toMission);
-          }
           if (bot->event->eventSet(33))
           { // start mission (button pressed)
             printf("Mission:: starting auto mission part from %d to %d\n", fromMission, toMission);
             mission = fromMission;
             state = mission;
-            started = true;
-            wait4running = true;
-            t.now();
-            printf("%ld.%06ld Mission %d started\n", t.getSec(), t.getMilisec(), mission);
-          }
-          else
-          { // nothing to do
-            if (loop %500 == 0)
-            {
-              t.now();
-              printf("%ld.%06ld Mission: in auto mode, but waiting for start signal (event 33)\n", t.getSec(), t.getMilisec());
-            }
-            usleep(20000);
           }
           break;
         case 1: // running auto mission
-//           printf("Mission:: starting mission 1, state=%d, running=%d, line=%d, thread=%d\n", 
-//                  missionState, bot->info.missionRunning, bot->info.missionLineNum, bot->info.missionThread);
-          ended = setRacing(missionState);
-          if (wait4running and not running and bot->info->missionRunning)
-            running = true;
+          ended = mission1(missionState);
           break;
 
           case 2:
@@ -250,26 +213,23 @@ void UMission::runMission()
           break;
       }
       if (ended)
-      { // mission part ended
-        printf("Mission:: ended\n");
+      { // start next mission part
         mission++;
         state++;
         ended = false;
         missionState = 0;
-        missionStateOld = -1;
-      }
-      // debug print
-      if (missionState != missionStateOld)
-      { // debug print of mission state
-//         printf("Mission %d state %d\n", mission, missionState);
-        missionStateOld = missionState;
       }
     }
     // debug print end
     // release CPU a bit (10ms)
     usleep(10000);
-    // are we finished
-    if (bot->event->eventSet(0))// or (running and not bot->info.missionRunning))
+    if (bot->joy->button[1])
+    { // red button -> save image
+      printf("UMission::runMission:: button 1 (red)\n");
+      cam->saveImage = true;
+    }
+    // are we finished - send event 0 to disable motors
+    if (bot->event->eventSet(0))
     { // robot say stop
       finished = true;
       printf("Mission:: insist we are finished\n");
@@ -282,10 +242,12 @@ void UMission::runMission()
       finished = true;
     }
   }
- // system("espeak \"mission ended\" -ven+f4 -s130 -a20 &"); 
-  printf("Mission:: all finished\n");
   bot->send("stop\n");
-  finished = true;
+  const int MSL = 120;
+  char s[MSL];
+  //snprintf(s, MSL, "espeak \"robot %s is happy. Don't kill me.\"  -ven+f4 -s130 -a30  2>/dev/null &", bot->info->robotname);
+  system(s); 
+  printf("Mission:: all finished\n");
 }
 
 
@@ -302,41 +264,51 @@ bool UMission::mission1(int & state)
   bool finished = false;
   // First commands to send to robobot in given mission
   // (robot sends event 1 after driving 1 meter)):
-  //
-//   float startDist = bot->dist;
-  // Primary loop for robobot mission:
-  // run the desired mission
   switch (state)
   {
-    case 0: // first PART 
-      snprintf(lines[0], MAX_LEN, "vel=0.3,acc=2:dist=0.6");
-      snprintf(lines[1], MAX_LEN, "tr=0.2:turn=90,time=10");
+    case 0:
+      system("espeak \"trigger distance sensor 2 to start\" -ven+f4 -s130 -a60 2>/dev/null &"); 
+      printf("\n********************************** espeak: 'trigger IR2 to start'\n");
+      state++;
+      break;
+    case 1: // first PART 
+      snprintf(lines[0], MAX_LEN, "vel=0 : ir2 < 0.3");
+      snprintf(lines[1], MAX_LEN, "vel=0.3,acc=2:dist=0.6");
+      snprintf(lines[2], MAX_LEN, "tr=0.2:turn=90,time=10");
       // last line should never end, as robot then think we are finished
       // so therefore a timeout of 1 second, to allow next set of
       // commands to be delivered
-      snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-      missionSendAndRun(lineList, 3);
+      snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
+      snprintf(lines[4], MAX_LEN, "vel=0: dist=0.5");
+      missionSendAndRun(lineList, 5);
+      // make sure event 1 is cleared
+      bot->event->eventSet(1);
       state++;
       break;
-    case 1:
+    case 2:
+      // wait for event 1
       if (bot->event->eventSet(1))
       { // finished first drive
         state = 10;
-//         printf("mission finished first part\n");
+        system("espeak \"Sending code snippet 2.\" -ven+f4 -s130 -a60 2>/dev/null &"); 
       }
       break;
     case 10: // go back to start position and stop
-      snprintf(lines[0], MAX_LEN, ": dist=0.6");
+      snprintf(lines[0], MAX_LEN, "vel=0.3 : dist=0.6");
       snprintf(lines[1], MAX_LEN, "tr=0.05:turn=90,time=10");
-      snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-      missionSendAndRun(lineList, 3);
+      snprintf(lines[2], MAX_LEN, "event=2:time=1.1");
+      snprintf(lines[3], MAX_LEN, "vel=0: dist=0.5");
+      missionSendAndRun(lineList, 4);
+      // make sure event 2 is cleared
+      bot->event->eventSet(2);
       state++;        
       break;
     case 11:
-      if (bot->event->eventSet(1))
+      // wait for event 2
+      if (bot->event->eventSet(2))
       { // finished
         state = 20;
-        printf("mission ended\n");
+        printf("UMission::mission1: mission ended \n");
       }
       break;
     case 999:

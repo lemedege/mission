@@ -18,12 +18,15 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <string.h>
 #include "ubridge.h"
 
-UInfo::UInfo(UBridge * bridge_ptr)
+UInfo::UInfo(UBridge * bridge_ptr, bool openLog)
 {
   bridge = bridge_ptr;
   gettimeofday(&bootTime, NULL);
+  // default
+  strncpy(robotname, "no name", MAX_NAME_LENGTH);
 }
 
 
@@ -34,6 +37,31 @@ void UInfo::decodeHbt(char * msg)
   batteryVoltage = strtof(p1, &p1);
 }
 
+void UInfo::decodeId(char * msg)
+{ // rid 84 0.206 9.68 48 0.04 0.04 0 1 9.89802 6 Cleo
+  // snprintf(reply, MRL, "rid %d %g %g %d %g %g %g %d %g %d %s\r\n",
+  //   robotId, 
+  //   odoWheelBase, gear, 
+  //   pulsPerRev,
+  //   odoWheelRadius[0], odoWheelRadius[1],
+  //   balanceOffset,
+  //   batteryUse, batteryIdleVoltageInt * batVoltIntToFloat,
+  //   robotHWversion,
+  //   robotname[robotId]
+  //   ); 
+  char * p1 = &msg[3];
+  robotId = strtol(p1, &p1, 10);
+  odoWheelBase = strtof(p1, &p1);
+  gear = strtof(p1, &p1);
+  pulsPerRev = strtol(p1, &p1, 10);
+  odoWheelRadius[0] = strtof(p1, &p1);
+  odoWheelRadius[1] = strtof(p1, &p1);
+  balanceOffset = strtof(p1, &p1);
+  batteryUse = strtol(p1, &p1, 10);
+  batteryIdleVoltage = strtof(p1, &p1);
+  robotHWversion = strtol(p1, &p1, 10);
+  strncpy(robotname, p1, MAX_NAME_LENGTH);
+}
 
 void UInfo::decodeMission(char * msg)
 {
@@ -76,6 +104,8 @@ float UInfo::getTime()
 
 void UInfo::subscribe()
 {
-  bridge->send("mis subscribe 6\n"); // mission data
+  bridge->send("mis subscribe 2\n"); // mission data
   bridge->send("hbt subscribe 1\n"); // time and mission info  
+  bridge->send("rid subscribe 3\n"); // get robot ID values
+  bridge->send("robot u4\n"); // request ID values from robot (once should be enough)
 }

@@ -275,6 +275,33 @@ u2dline.cpp.s:
 	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/u2dline.cpp.s
 .PHONY : u2dline.cpp.s
 
+uaccgyro.o: uaccgyro.cpp.o
+
+.PHONY : uaccgyro.o
+
+# target to build an object file
+uaccgyro.cpp.o:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uaccgyro.cpp.o
+.PHONY : uaccgyro.cpp.o
+
+uaccgyro.i: uaccgyro.cpp.i
+
+.PHONY : uaccgyro.i
+
+# target to preprocess a source file
+uaccgyro.cpp.i:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uaccgyro.cpp.i
+.PHONY : uaccgyro.cpp.i
+
+uaccgyro.s: uaccgyro.cpp.s
+
+.PHONY : uaccgyro.s
+
+# target to generate assembly for a file
+uaccgyro.cpp.s:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uaccgyro.cpp.s
+.PHONY : uaccgyro.cpp.s
+
 ubridge.o: ubridge.cpp.o
 
 .PHONY : ubridge.o
@@ -409,6 +436,33 @@ uinfo.s: uinfo.cpp.s
 uinfo.cpp.s:
 	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uinfo.cpp.s
 .PHONY : uinfo.cpp.s
+
+uirdist.o: uirdist.cpp.o
+
+.PHONY : uirdist.o
+
+# target to build an object file
+uirdist.cpp.o:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uirdist.cpp.o
+.PHONY : uirdist.cpp.o
+
+uirdist.i: uirdist.cpp.i
+
+.PHONY : uirdist.i
+
+# target to preprocess a source file
+uirdist.cpp.i:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uirdist.cpp.i
+.PHONY : uirdist.cpp.i
+
+uirdist.s: uirdist.cpp.s
+
+.PHONY : uirdist.s
+
+# target to generate assembly for a file
+uirdist.cpp.s:
+	$(MAKE) -f CMakeFiles/mission.dir/build.make CMakeFiles/mission.dir/uirdist.cpp.s
+.PHONY : uirdist.cpp.s
 
 ujevois.o: ujevois.cpp.o
 
@@ -624,6 +678,9 @@ help:
 	@echo "... u2dline.o"
 	@echo "... u2dline.i"
 	@echo "... u2dline.s"
+	@echo "... uaccgyro.o"
+	@echo "... uaccgyro.i"
+	@echo "... uaccgyro.s"
 	@echo "... ubridge.o"
 	@echo "... ubridge.i"
 	@echo "... ubridge.s"
@@ -639,6 +696,9 @@ help:
 	@echo "... uinfo.o"
 	@echo "... uinfo.i"
 	@echo "... uinfo.s"
+	@echo "... uirdist.o"
+	@echo "... uirdist.i"
+	@echo "... uirdist.s"
 	@echo "... ujevois.o"
 	@echo "... ujevois.i"
 	@echo "... ujevois.s"

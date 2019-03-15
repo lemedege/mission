@@ -202,6 +202,7 @@ void UCamera::run()
       saveImage = false;
       printf("Image saved\n");
     }
+    usleep(10000);
   }  
 }
 

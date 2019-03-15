@@ -40,21 +40,28 @@ public:
   /// flag to finish all (pending) missions and RC
   bool finished = false;
 private:
+  /**
+   * Pointer to communication and data part of this mission application */
   UBridge * bot;
+  /**
+   * Pointer to camera (class) of this mission application */
   UCamera * cam;
-  // read thread handle
-  thread * th1 = NULL;
-  // set true to stop thread
-  bool th1stop = false;
+  /** is thread active */
   bool active = false;
-  // thread on Regbot
-  int threadActive = false;
-  /// space for fabricated lines
-  const static int MAX_LINES = 10;
+  /** is the number of the active thread in the REGBOT */
+  int threadActive;
+  /** space for fabricated lines
+   * maximum number of lines */
+  /**
+   * maximum line count for the biggest mission snippet 
+   * (limit is probably around 20 with version 4.1 (red) base board) */
+  static const int missionLineMax = 15;
+  /** maximum length of one mission line (in characters) */
   const static int MAX_LEN = 100;
-  char lines[MAX_LINES][MAX_LEN];
-  // make an array of pointers to mission lines
-  const char * lineList[MAX_LINES];
+  /** definition of array with c-strings for the mission snippets */
+  char lines[missionLineMax][MAX_LEN];
+  /** an array of pointers to mission lines */
+  const char * lineList[missionLineMax];
   
 public:
   /**
@@ -80,6 +87,7 @@ public:
   void start()
   {
     active = true;
+    printf("UMission::start active=true\n");
   }
   /**
    * Stop all missions */
@@ -91,7 +99,8 @@ public:
     if (th1 != NULL)
       th1->join();
   }
-  /** which missions to run */
+  /** which missions to run 
+   * These values can be set as parameters, when starting the mission */
   int fromMission;
   int toMission;
 private:
@@ -102,10 +111,7 @@ private:
   /**
    * Mission part 2
    * \return true, when finished */
-  bool mission2(int & state)
-  { // should be replaced with something better
-    return mission1(state);
-  }
+  bool mission2(int & state);
   
 
   bool mission3(int & state);
@@ -116,8 +122,12 @@ private:
   bool setNormal(int & state);
 
 private:
+  /**
+   * Send a number of lines to the REGBOT in a dormant thread, and 
+   * make these lines active - stopping the last set of lines.
+   * \param missionLines is a pointer to an array of c-strings
+   * \param missionLineCnt is the number of strings to be send from the missionLine array. */
   void missionSendAndRun(const char * missionLines[], int missionLineCnt);
-  static const int missionLineMax = 10;
 };
 
 

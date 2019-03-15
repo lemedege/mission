@@ -43,7 +43,7 @@ using namespace std;
 //////////////////////////////////////////////////////////////////
 
 /** constructor */
-UBridge::UBridge(const char * server)
+UBridge::UBridge(const char * server, bool openLog)
 {
   timeval t;
   th1stop = false;
@@ -61,7 +61,7 @@ UBridge::UBridge(const char * server)
     th1 = new thread(runObj, this);
   }
   botlog = NULL;
-  if (false)
+  if (openLog)
   {
     const int MNL = 100;
     char date[MNL];
@@ -77,7 +77,13 @@ UBridge::UBridge(const char * server)
     gettimeofday(&t, NULL);
     float dt = getTimeDiff(t, info->bootTime);
     logMtx.lock();
-    fprintf(botlog, "%6.3f->: %s %d\n", dt, "Connected to bridge ", connected);
+    fprintf(botlog, "%% log of messages transmitted to brudge (outgoing) (<-)\n");
+    fprintf(botlog, "%% received from bridge (incoming) (->)\n");
+    fprintf(botlog, "%% 1 Linux timestamp (seconds since 1 jan 1970)\n");
+    fprintf(botlog, "%% 2 mission time (sec)\n");
+    fprintf(botlog, "%% 3 direction flag ->: or <-:\n");
+    fprintf(botlog, "%% 4 string send or received\n");
+    fprintf(botlog, "%lu.%03ld %6.3f->: %s %d\n", t.tv_sec, t.tv_usec/1000, dt, "Connected to bridge ", connected);
     fflush(botlog);
     logMtx.unlock();
   }
@@ -118,11 +124,11 @@ void UBridge::send(const char * cmd)
       if (botlog != NULL)
       {
         logMtx.lock();
-        fprintf(botlog, "%6.3f->: %s", dt, cmd);
+        fprintf(botlog, "%lu.%03ld %6.3f->: %s", t.tv_sec, t.tv_usec/1000, dt, cmd);
         fflush(botlog);
         logMtx.unlock();
       }
-      printf("UBridge::send %6.3f->: %s", dt, cmd);        
+      printf("UBridge::send %6.3f->: %s", dt, cmd);
     }
   }
   // 
@@ -216,11 +222,13 @@ void UBridge::decode(char * message)
     else if (strncmp(message, "event", 5)==0)
     {
       event->decode(message);
-      t.now();
-      printf("%ld.%03ld UBridge::decode: %s\n", t.getSec(), t.getMilisec(), message);
+//       t.now();
+//       printf("%ld.%03ld UBridge::decode: %s\n", t.getSec(), t.getMilisec(), message);
     }
     else if (strncmp(message, "mis ", 4)==0)
       info->decodeMission(message); // mission status skipped
+    else if (strncmp(message, "rid ", 4)==0)
+      info->decodeId(message); // mission status skipped
     else if (strncmp(message, "joy ", 4)==0)
     {
       joy->decode(message); // 
@@ -233,11 +241,24 @@ void UBridge::decode(char * message)
     { // motor current
       motor->decodeCurrent(message);
     }
+    else if (strncmp(message, "irc ", 4)==0)
+    { // motor current
+      irdist->decode(message);
+    }
+    else if (strncmp(message, "acw ", 4)==0)
+    { // motor current
+      accgyro->decode(message);
+    }
+    else if (strncmp(message, "gyw ", 4)==0)
+    { // motor current
+      
+      accgyro->decode(message);
+    }
     else if (strncmp(message, "rid ", 4)==0)
       ; // robot ID skipped
     else if (*message == '#')
       // just a message from Regbot
-      printf("%s", message);
+      printf("%s\n", message);
     else
     { // not yet supported message - ignore
       printf("Regbot:: unhandled message: '%s'\n", message);
@@ -249,7 +270,7 @@ void UBridge::decode(char * message)
     gettimeofday(&t, NULL);
     float dt = getTimeDiff(t, info->bootTime);
     logMtx.lock();
-    fprintf(botlog, "%6.3f<-: %s\n", dt, message);
+    fprintf(botlog, "%lu.%03ld %6.3f<-: %s\n", t.tv_sec, t.tv_usec/1000, dt, message);
     logMtx.unlock();
   }
 }

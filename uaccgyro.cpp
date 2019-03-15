@@ -21,15 +21,14 @@
 #include "ubridge.h"
 
 
-UPose::UPose(UBridge * bridge_ptr, bool openlog)
+UAccGyro::UAccGyro(UBridge* bridge_ptr, bool openlog)
 {
   bridge = bridge_ptr;
   if (openlog)
     openLog();
 }
 
-
-void UPose::openLog()
+void UAccGyro::openLog()
 { // open pose log
   const int MNL = 100;
   char date[MNL];
@@ -37,35 +36,53 @@ void UPose::openLog()
   UTime time;
   time.now();
   time.getForFilename(date);
-  snprintf(name, MNL, "log_odometry_%s.txt", date);
+  snprintf(name, MNL, "log_accgyro_%s.txt", date);
   logfile = fopen(name, "w");
   if (logfile != NULL)
   {
-    fprintf(logfile, "%% robobot logfile\n");
+    fprintf(logfile, "%% robobot Accelerometer and gyro log\n");
     fprintf(logfile, "%% 1 Timestamp in seconds\n");
-    fprintf(logfile, "%% 2 x (forward)\n");
-    fprintf(logfile, "%% 3 y (left)\n");
-    fprintf(logfile, "%% 4 h (heading in radians)\n");
+    fprintf(logfile, "%% 2-4 accelerometer x,y,z [m/s^2]\n");
+    fprintf(logfile, "%% 5-7 gyro x,y,z [deg/s]\n");
   }
 }
 
-void UPose::decode(char * msg)
-{ // assuming msg = "pse ..."
+
+void UAccGyro::decode(char* msg)
+{ // assuming msg = "irc ..."
   char * p1 = &msg[3];
-  float x2 = x, y2 = y;
-  x = strtof(p1, &p1);
-  y = strtof(p1, &p1);
-  h = strtof(p1, &p1);
-  dist += hypot(x - x2, y - y2);
-  if (logfile != NULL)
+  bool isOK = true;
+  if (strncmp(msg, "acw", 3) == 0)
   {
-    UTime t;
-    t.now();
-    fprintf(logfile, "%ld.%03ld %.3f %.3f %.4f\n", t.getSec(), t.getMilisec(), x, y, h);
+    acc[0] = strtof(p1, &p1);
+    acc[1] = strtof(p1, &p1);
+    acc[2] = strtof(p1, &p1);
+  }
+  else if (strncmp(msg, "gyw", 3) == 0)
+  {
+    gyro[0] = strtof(p1, &p1);
+    gyro[1] = strtof(p1, &p1);
+    gyro[2] = strtof(p1, &p1);
+  }
+  else 
+    isOK = false;
+  if (isOK)
+  {
+    updated();
+    if (logfile != NULL)
+    {
+      fprintf(logfile, "%ld.%03ld %.3f %.3f %.3f %.3f %.3f %.3f\n", dataTime.tv_sec, dataTime.tv_usec / 1000, acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2]);
+    }
   }
 }
 
-void UPose::subscribe()
-{
-  bridge->send("pse subscribe 1\n"); // Pose
+void UAccGyro::subscribe()
+{ // ask bridge to forward all acc messages
+  bridge->send("acw subscribe 1\n"); 
+  // ask bridge to forward all gyro messages
+  bridge->send("gyw subscribe 1\n");
+  // ask regbot to generate acc messages
+  bridge->send("robot sub 1 1 4\n");
+  // ask regbot to generate gyro messages
+  bridge->send("robot sub 1 1 5\n");
 }

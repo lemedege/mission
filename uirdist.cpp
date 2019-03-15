@@ -21,7 +21,7 @@
 #include "ubridge.h"
 
 
-UPose::UPose(UBridge * bridge_ptr, bool openlog)
+UIRdist::UIRdist(UBridge* bridge_ptr, bool openlog)
 {
   bridge = bridge_ptr;
   if (openlog)
@@ -29,7 +29,7 @@ UPose::UPose(UBridge * bridge_ptr, bool openlog)
 }
 
 
-void UPose::openLog()
+void UIRdist::openLog()
 { // open pose log
   const int MNL = 100;
   char date[MNL];
@@ -37,35 +37,37 @@ void UPose::openLog()
   UTime time;
   time.now();
   time.getForFilename(date);
-  snprintf(name, MNL, "log_odometry_%s.txt", date);
+  snprintf(name, MNL, "log_irdist_%s.txt", date);
   logfile = fopen(name, "w");
   if (logfile != NULL)
   {
-    fprintf(logfile, "%% robobot logfile\n");
+    fprintf(logfile, "%% robobot IR distance log\n");
     fprintf(logfile, "%% 1 Timestamp in seconds\n");
-    fprintf(logfile, "%% 2 x (forward)\n");
-    fprintf(logfile, "%% 3 y (left)\n");
-    fprintf(logfile, "%% 4 h (heading in radians)\n");
+    fprintf(logfile, "%% 2 IR 1 distance [meter]\n");
+    fprintf(logfile, "%% 3 IR 2 distance [meter]\n");
+    fprintf(logfile, "%% 4 IR 1 raw [AD value]\n");
+    fprintf(logfile, "%% 5 IR 2 raw [AD value]\n");
   }
 }
+//
 
-void UPose::decode(char * msg)
-{ // assuming msg = "pse ..."
+void UIRdist::decode(char* msg)
+{ // assuming msg = "irc ..."
   char * p1 = &msg[3];
-  float x2 = x, y2 = y;
-  x = strtof(p1, &p1);
-  y = strtof(p1, &p1);
-  h = strtof(p1, &p1);
-  dist += hypot(x - x2, y - y2);
+  dist[0] = strtof(p1, &p1);
+  dist[1] = strtof(p1, &p1);
+  raw[0] = strtol(p1, &p1, 10);
+  raw[1] = strtol(p1, &p1, 10);
+  updated();
   if (logfile != NULL)
   {
-    UTime t;
-    t.now();
-    fprintf(logfile, "%ld.%03ld %.3f %.3f %.4f\n", t.getSec(), t.getMilisec(), x, y, h);
+    fprintf(logfile, "%ld.%03ld %.3f %.3f %d %d\n", dataTime.tv_sec, dataTime.tv_usec / 1000, dist[0], dist[1], raw[0], raw[1]);
   }
 }
 
-void UPose::subscribe()
-{
-  bridge->send("pse subscribe 1\n"); // Pose
+void UIRdist::subscribe()
+{ // tell bridge to forward IR messages (type irc)
+  bridge->send("irc subscribe 1\n"); 
+  // tell REGBOT to generate IR messages (at priority 1 and msg type 2)
+  bridge->send("robot sub 1 1 2\n");   
 }

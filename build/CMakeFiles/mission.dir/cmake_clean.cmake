@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/mission.dir/main.cpp.o"
   "CMakeFiles/mission.dir/urun.cpp.o"
+  "CMakeFiles/mission.dir/uirdist.cpp.o"
+  "CMakeFiles/mission.dir/uaccgyro.cpp.o"
   "CMakeFiles/mission.dir/ucamera.cpp.o"
   "CMakeFiles/mission.dir/ujevois.cpp.o"
   "CMakeFiles/mission.dir/TimeoutSerial.cpp.o"

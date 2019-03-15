@@ -61,17 +61,10 @@ void runObj(URun * obj);
 class URun
 {
 public:
-  URun()
-  {
-    th1 = NULL;
-    th1stop = true;
-  }
-  
-  ////////////////////////////////////////////////
   
   ~URun()
   {
-    printf("instance of run stopping\n");
+//     printf("instance of run stopping\n");
     stop();
   }
   
@@ -79,7 +72,7 @@ public:
   
   virtual void run()
   {
-    printf("Should not show\n");
+    printf("Should not show (nothing to run)\n");
   }
   
   ////////////////////////////////////////////////
@@ -97,13 +90,12 @@ public:
   virtual void stop()
   {
     th1stop = true;
-    
     if (th1 != NULL)
     {
-      printf("thread joining\n");
+//       printf("thread joining\n");
       if (th1->joinable())
         th1->join();
-      printf("thread stopped\n");
+//       printf("thread stopped\n");
       th1 = NULL;
     }
   }
@@ -114,9 +106,9 @@ protected:
     th1 = NULL;
   }
   // read thread handle
-  std::thread * th1;
+  std::thread * th1 = NULL;
   // set true to stop thread
-  bool th1stop;
+  bool th1stop = false;
   
 };
 
