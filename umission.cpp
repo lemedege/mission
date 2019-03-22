@@ -200,8 +200,8 @@ while (not finished and not th1stop)
         }
         break;
         case 1:
-            bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
-	bot->send("eew\n\0");
+            bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+	//bot->send("eew\n\0");
                     ended = true;
                     break;
         case 2: // running auto mission
@@ -209,8 +209,8 @@ while (not finished and not th1stop)
         break;
         
         case 3:
-            bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
-	bot->send("eew\n\0");            
+            bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
+	//bot->send("eew\n\0");            
 ended = true;
             break;
             
@@ -219,8 +219,8 @@ ended = true;
             break;
             
             case 5:
-                    bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
-	bot->send("eew\n\0");                   
+                    bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+	//bot->send("eew\n\0");                   
  ended = true;
     break;
 
