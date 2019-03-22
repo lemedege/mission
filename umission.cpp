@@ -489,7 +489,7 @@ switch (state)
 return finished;
 }
 
-bool UMission::akseGate(int & state)
+bool UMission::axeGate(int & state)
 {
 	bool finished = false;
 
