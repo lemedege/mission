@@ -489,6 +489,37 @@ switch (state)
 return finished;
 }
 
+bool UMission::akseGate(int & state)
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.4, acc=2.0, edgel=0.0, white=1: dist=0.4,ir2<0.2");
+		snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
+		snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:ir2<0.21");
+		snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5.0, edgel=0.0, white=1:ir2>0.4");
+		snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5, edgel=0.0, white=1:time=0.1");
+		snprintf(lines[5], MAX_LEN, "vel=0.5,acc=5, edgel=0.0, white=1:xl>16,ir2<0.25");
+		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:time=0.1");
+		missionSendAndRun(lineList, 7);
+		state++;
+		break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
 
 
 bool UMission::racetrack2(int & state)
