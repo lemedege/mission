@@ -498,9 +498,9 @@ bool finished = false;
 switch (state)
 {
     case 0: //race track 
-    snprintf(lines[0], MAX_LEN, "vel=1.0, acc=1.0, edgel=0.0, white=1 xl>12");
-    snprintf(lines[1], MAX_LEN, "vel=-2.0, acc=5.0, edgel=0.0, white=1: dist=1");
-    snprintf(lines[2], MAX_LEN, "vel=0.5, acc=5.0, edgel=0.0, white=1: dist=1");
+    snprintf(lines[0], MAX_LEN, "vel=2.0, acc=3, edgel=0.0, white=1 xl>8");
+    snprintf(lines[1], MAX_LEN, "vel=2.0, acc=5.0, edgel=0.0, white=1: dist=2");
+    snprintf(lines[2], MAX_LEN, "vel=1.8, acc=1.0, edgel=0.0, white=1: xl>8");
     snprintf(lines[3], MAX_LEN, "vel=0.0, acc=1000.0:time=1");
     snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
     missionSendAndRun(lineList, 5);
