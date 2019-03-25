@@ -325,7 +325,7 @@ bool UMission::mission1(int & state)
  *              therefore defined as reference with the '&'.
  *              State will be 0 at first call.
  * \returns true, when finished. */
-bool UMission::mission3(int & state)
+bool UMission::kval_safe(int & state)
 {
   bool finished = false;
   // First commands to send to robobot in given mission
@@ -444,13 +444,333 @@ bool UMission::mission3(int & state)
 }
 
 
+//Regbot with out detection of regbot 
+bool UMission::regbot_wo(int & state)
+//Regbot er midtten af banen, robot position er forventet efter trappen ved "crossingline" (plejlmærke 2")
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // Drej 90 ccw, find cirkel   
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "tr=0.1,vel=0.2,acc=3:turn=90");
+		snprintf(lines[1], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>16");
+		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 4);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 10;
+		}
+		break;
+
+	case 10: // Kør i cirkel
+		snprintf(lines[0], MAX_LEN, "tr=0.1,vel=0.2,acc=3:turn=70");
+		snprintf(lines[1], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>16");
+		snprintf(lines[2], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:dist=0.2");
+		snprintf(lines[3], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>10");
+		snprintf(lines[4], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:dist=0.2");
+		snprintf(lines[5], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>10");
+		snprintf(lines[6], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:dist=0.2");
+		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>18");
+		snprintf(lines[8], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 10);
+		state++;
+		break;
+	case 11:
+		if (bot->event->eventSet(1))
+		{
+			state = 20;
+			printf("mission ended\n");
+		}
+		break;
+
+	case 20: // midter gate og kør op til lukket tunel 
+		snprintf(lines[0], MAX_LEN, "tr=0.1,vel=0.3,acc=3:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:dist=0.1");
+		snprintf(lines[2], MAX_LEN, "vel=0.2,acc=3,edgel=0,white=1:lv=0");
+		snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=0.1");
+		snprintf(lines[4], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=180");
+		snprintf(lines[5], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:xl>16");
+		snprintf(lines[6], MAX_LEN, "vel=0.3,acc=3,edgel=0.0,white=1:dist=0.3");
+		snprintf(lines[7], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[8], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 9);
+		state++;
+		break;
+	case 21:
+		if (bot->event->eventSet(1))
+		{ 
+			state = 999;
+			printf("mission ended\n");
+		}
+		break;
+	
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+// Lukket tunnel 
+bool UMission::lukket_tunnel(int & state)
+// starter ca 0.5 m fra fronten af porten 
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // tæt på front porten og kør i position    
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=3,edgel=0.0,white=1:ir2=0.25");
+		snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.65");
+		snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+		snprintf(lines[4], MAX_LEN, "vel=0.3,acc=3:dist=0.65");
+		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+		snprintf(lines[6], MAX_LEN, "vel=0.2,acc=3,edgel=0.0,white=1:ir2=0.20");
+		snprintf(lines[7], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+		snprintf(lines[8], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 9);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 10;
+		}
+		break;
+
+	case 10: // Kør i cirkel
+		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3:dist=0.45");
+		snprintf(lines[1], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=90,xl>16");
+		snprintf(lines[2], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=90");
+		snprintf(lines[3], MAX_LEN, "vel=0.2,acc=3,edgel=0.0,white=1:dist=0.65");
+		snprintf(lines[4], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+		snprintf(lines[5], MAX_LEN, "tr=1.2,vel=0.3,acc=3:turn=-180,xl>8");
+		snprintf(lines[6], MAX_LEN, "tr=1.2,vel=0.3,acc=3:turn=-180,xl>8");
+		snprintf(lines[7], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=90");
+		snprintf(lines[8], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 10);
+		state++;
+		break;
+	case 11:
+		if (bot->event->eventSet(1))
+		{
+			state = 999;
+			printf("mission ended\n");
+		}
+		break;
+
+	
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+//racerbanen 
+bool UMission::racetrack(int & state)
+//racerbanen startes på odometri fra lukket tunnel (eller vison) forventes at starte 2 sving før så der skal køres ca 2 m + 180 grader sving 
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // Klargør til race kør i position    
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=6,edger=0.0,white=1:dist=3.0");
+		snprintf(lines[1], MAX_LEN, "vel=0,acc=100:time=1");
+		snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 3);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 10;
+		}
+		break;
+
+	case 10: // stageing the racecar skift til race mode controller
+		bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
+		snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 1);
+		state++;
+
+		break;
+
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 20;
+			//         printf("mission finished first part\n");
+		}
+
+	case 20: // midter gate og kør op til lukket tunel 
+		snprintf(lines[0], MAX_LEN, "vel=2.0,acc=3,edgel=0.0,white=1:xl>12");
+		snprintf(lines[1], MAX_LEN, "vel=2.0,acc=5,edgel=0.0,white=1:dist=2");
+		snprintf(lines[2], MAX_LEN, "vel=1.8,acc=1,edgel=0.0,white=1:xl>12");
+		snprintf(lines[3], MAX_LEN, "vel=0,acc=10000:time=1.0");
+		snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 5);
+		state++;
+		break;
+	case 21:
+		if (bot->event->eventSet(1))
+		{
+			state = 30;
+			printf("mission ended\n");
+		}
+		break;
+
+	case 30: // first PART 
+		bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+		snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 1);
+
+		state++;
+		break;
+
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+			//         printf("mission finished first part\n");
+		}
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+// Fra racerbanen tilbage til økseport
+bool UMission::from_race_to_axe(int & state)
+//Finde linjen igen efter race og finde op til økseporten. forventet start position halv meter fortsat lige ud efter racerbanen
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // find linjen igen og køre tilbage af racerbanen    
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "vel=-0.15,acc=3,edgel=0.0,white=1:xl>2");
+		snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=180");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:dist=2");
+		snprintf(lines[3], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:xl>6");
+		snprintf(lines[4], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:xl>6");
+		snprintf(lines[5], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:xl>6");
+		snprintf(lines[6], MAX_LEN, "vel=0,acc=1000:time=0.1");
+		snprintf(lines[7], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 8);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 10;
+		}
+		break;
+
+	case 10: // Drej og stop ved sidste linje [ved cirklen]
+		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:dist=0.65");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:xl>6");
+		snprintf(lines[3], MAX_LEN, "vel=0,acc=1000:time=1");
+		snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 5);
+		state++;
+		break;
+	case 11:
+		if (bot->event->eventSet(1))
+		{
+			state = 99;
+			printf("mission ended\n");
+		}
+		break;
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+// økseport
+bool UMission::axegate(int & state)
+//Finde linjen igen efter race og finde op til økseporten 
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // Find økseporten med ir og odometri stop og vent til den er roteret væk. stop på crossing linje  
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2 : ir2<0.2,dist=0.4");
+		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100000:time=0.1");
+		snprintf(lines[2], MAX_LEN, "vel=0.0,acc=10000:ir2<0.21");
+		snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5:ir2>0.4");
+		snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5:time=0.1");
+		snprintf(lines[5], MAX_LEN, "vel=0.5,acc=5:xl>4");
+		snprintf(lines[6], MAX_LEN, "vel=0,acc=1000:time=0.1");
+		snprintf(lines[7], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 8);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 999;
+		}
+		break;
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+// goal 
+bool UMission::goal_from_axegate(int & state)
+//starter fra crossing linje 
+{
+	bool finished = false;
+	switch (state)
+	{
+	case 0: // drej og kør i mål 
+		printf("running mission regbot_wo\n");
+		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:dist=3");
+		snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
+		missionSendAndRun(lineList, 3);
+		state++;
+		break;
+	case 1:
+		if (bot->event->eventSet(1))
+		{
+			state = 999;
+		}
+		break;
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
 
 
-
-
-
-
-
+// ændre controller paramerter 
 bool UMission::setRacing(int & state)
 {
   bool finished = false;
@@ -458,7 +778,7 @@ bool UMission::setRacing(int & state)
   switch (state)
   {
     case 0: // first PART 
-    bot->send("cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
+    bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
     snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
     missionSendAndRun(lineList, 1);
       state++;
@@ -486,7 +806,7 @@ bool UMission::setNormal(int & state)
   switch (state)
   {
     case 0: // first PART 
-    bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+    bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
     snprintf(lines[0], MAX_LEN, "event=1:time=1.1");
     missionSendAndRun(lineList, 1);
 
