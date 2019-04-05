@@ -118,7 +118,8 @@ private:
 
 
   bool racetrack(int & state);
-  bool racetrack2(int & state);  
+  bool racetrack2(int & state);
+  bool axeGate(int & state);
   
   bool setRacing(int & state);
 
