@@ -1,0 +1,82 @@
+% log of messages transmitted to brudge (outgoing) (<-)
+% received from bridge (incoming) (->)
+% 1 Linux timestamp (seconds since 1 jan 1970)
+% 2 mission time (sec)
+% 3 direction flag ->: or <-:
+% 4 string send or received
+1553265560.043  0.001->: Connected to bridge  1
+1553265561.421  1.379->: robot stop
+1553265561.425  1.383->: robot <clear
+1553265561.430  1.387->: robot <add thread=1
+1553265561.434  1.392->: robot <add irsensor=1,vel=0:dist=0.2
+1553265561.438  1.396->: robot <add thread=100,event=30 : event=31
+1553265561.440  1.398<-: # Welcome to REGBOT bridge - send 'help' for more info
+1553265561.442  1.400<-: bridge
+1553265561.442  1.400->: robot <add vel=0 : time=0.1
+1553265561.446  1.404->: robot <add vel=0 : time=0.1
+1553265561.450  1.408->: robot <add vel=0 : time=0.1
+1553265561.455  1.413->: robot <add vel=0 : time=0.1
+1553265561.459  1.417->: robot <add vel=0 : time=0.1
+1553265561.464  1.422->: robot <add vel=0 : time=0.1
+1553265561.468  1.426->: robot <add vel=0 : time=0.1
+1553265561.473  1.431->: robot <add vel=0 : time=0.1
+1553265561.477  1.435->: robot <add vel=0 : time=0.1
+1553265561.481  1.439->: robot <add vel=0 : time=0.1
+1553265561.485  1.443->: robot <add vel=0 : time=0.1
+1553265561.490  1.448->: robot <add vel=0 : time=0.1
+1553265561.495  1.452->: robot <add vel=0 : time=0.1
+1553265561.499  1.457->: robot <add vel=0 : time=0.1
+1553265561.504  1.462->: robot <add vel=0 : time=0.1
+1553265561.508  1.466->: robot <add thread=101,event=31 : event=30
+1553265561.512  1.470->: robot <add vel=0 : time=0.1
+1553265561.516  1.474->: robot <add vel=0 : time=0.1
+1553265561.521  1.479->: robot <add vel=0 : time=0.1
+1553265561.526  1.484->: robot <add vel=0 : time=0.1
+1553265561.530  1.488->: robot <add vel=0 : time=0.1
+1553265561.535  1.493->: robot <add vel=0 : time=0.1
+1553265561.539  1.497->: robot <add vel=0 : time=0.1
+1553265561.543  1.501->: robot <add vel=0 : time=0.1
+1553265561.548  1.505->: robot <add vel=0 : time=0.1
+1553265561.552  1.510->: robot <add vel=0 : time=0.1
+1553265561.557  1.514->: robot <add vel=0 : time=0.1
+1553265561.561  1.519->: robot <add vel=0 : time=0.1
+1553265561.566  1.523->: robot <add vel=0 : time=0.1
+1553265561.570  1.528->: robot <add vel=0 : time=0.1
+1553265561.574  1.532->: robot <add vel=0 : time=0.1
+1553265561.589  1.547->: pse subscribe 1
+1553265561.594  1.552->: lip subscribe 1
+1553265561.598  1.556->: wve subscribe 2
+1553265561.603  1.561->: mca subscribe 2
+1553265561.607  1.565->: event subscribe 6
+1553265561.611  1.569->: event get
+1553265561.615  1.573->: joy subscribe 1
+1553265561.620  1.577->: joy get
+1553265561.622  1.580<-: lip 0 1 0.0000 20 0.0000 20 1 44 44 0 0 0 0 4.5 1 0
+1553265561.624  1.582->: wve subscribe 2
+1553265561.629  1.586->: mca subscribe 2
+1553265561.633  1.591->: mis subscribe 2
+1553265561.637  1.595->: hbt subscribe 1
+1553265561.641  1.599->: rid subscribe 3
+1553265561.646  1.604->: robot u4
+1553265561.650  1.608->: irc subscribe 1
+1553265561.655  1.613->: robot sub 1 1 2
+1553265561.655  1.613<-: event 1
+1553265561.659  1.617->: acw subscribe 1
+1553265561.663  1.621->: gyw subscribe 1
+1553265561.668  1.626->: robot sub 1 1 4
+1553265561.672  1.630->: robot sub 1 1 5
+1553265561.672  1.630<-: joy 1 0 8 11 0 -2 -32767 0 -2 -32767 0 0 0 0 0 0 0 0 0 0 0 0 0
+1553265561.676  1.634->: start
+1553265561.695  1.653<-: rid 86 0.21 9.68 48 0.045 0.045 0 1 9.89407 6 Thit
+1553265561.703  1.661<-: hbt 11.8362 11.8662 0 0 0 235
+1553265561.742  1.700<-: wve -0 -0
+1553265561.745  1.702<-: event 33
+1553265561.761  1.719->: robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06
+1553265561.762  1.720<-: pse 1.09341 -1.11854 -1.37932 2.01297 -0.031986
+1553265561.776  1.734->: stop
+1553265561.776  1.734<-: irc 1.500 0.139 589 68103 72000 24096 72296 24096 1 1
+1553265561.780  1.738->: stop
+1553265561.798  1.756<-: lip 0 1 0.0000 20 0.0000 20 1 44 44 0 0 0 0 4.5 1 0
+1553265561.808  1.766<-: acw 0.31167 -0.134258 -9.83678
+1553265561.817  1.775<-: gyw 0.152588 0.0915527 0
+1553265561.860  1.818<-: mca 0 -0

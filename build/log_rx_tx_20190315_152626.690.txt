@@ -1,0 +1,78 @@
+% log of messages transmitted to brudge (outgoing) (<-)
+% received from bridge (incoming) (->)
+% 1 Linux timestamp (seconds since 1 jan 1970)
+% 2 mission time (sec)
+% 3 direction flag ->: or <-:
+% 4 string send or received
+1552659986.691  0.001->: Connected to bridge  1
+1552659986.721  0.031->: robot stop
+1552659986.725  0.036->: robot <clear
+1552659986.729  0.040->: robot <add thread=1
+1552659986.733  0.044->: robot <add irsensor=1,vel=0:dist=0.2
+1552659986.736  0.046<-: # Welcome to REGBOT bridge - send 'help' for more info
+1552659986.737  0.048->: robot <add thread=100,event=30 : event=31
+1552659986.738  0.048<-: bridge
+1552659986.741  0.052->: robot <add vel=0 : time=0.1
+1552659986.745  0.056->: robot <add vel=0 : time=0.1
+1552659986.750  0.060->: robot <add vel=0 : time=0.1
+1552659986.754  0.064->: robot <add vel=0 : time=0.1
+1552659986.758  0.068->: robot <add vel=0 : time=0.1
+1552659986.762  0.072->: robot <add vel=0 : time=0.1
+1552659986.766  0.077->: robot <add vel=0 : time=0.1
+1552659986.770  0.081->: robot <add vel=0 : time=0.1
+1552659986.774  0.085->: robot <add vel=0 : time=0.1
+1552659986.778  0.089->: robot <add vel=0 : time=0.1
+1552659986.783  0.093->: robot <add vel=0 : time=0.1
+1552659986.787  0.097->: robot <add vel=0 : time=0.1
+1552659986.791  0.101->: robot <add vel=0 : time=0.1
+1552659986.795  0.106->: robot <add vel=0 : time=0.1
+1552659986.799  0.110->: robot <add vel=0 : time=0.1
+1552659986.804  0.114->: robot <add thread=101,event=31 : event=30
+1552659986.808  0.118->: robot <add vel=0 : time=0.1
+1552659986.812  0.123->: robot <add vel=0 : time=0.1
+1552659986.816  0.127->: robot <add vel=0 : time=0.1
+1552659986.821  0.131->: robot <add vel=0 : time=0.1
+1552659986.825  0.135->: robot <add vel=0 : time=0.1
+1552659986.829  0.140->: robot <add vel=0 : time=0.1
+1552659986.833  0.144->: robot <add vel=0 : time=0.1
+1552659986.837  0.148->: robot <add vel=0 : time=0.1
+1552659986.842  0.152->: robot <add vel=0 : time=0.1
+1552659986.861  0.172->: robot <add vel=0 : time=0.1
+1552659986.865  0.176->: robot <add vel=0 : time=0.1
+1552659986.870  0.180->: robot <add vel=0 : time=0.1
+1552659986.874  0.184->: robot <add vel=0 : time=0.1
+1552659986.878  0.189->: robot <add vel=0 : time=0.1
+1552659986.882  0.193->: robot <add vel=0 : time=0.1
+1552659986.897  0.207->: pse subscribe 1
+1552659986.901  0.211->: lip subscribe 1
+1552659986.905  0.216->: wve subscribe 2
+1552659986.909  0.220->: mca subscribe 2
+1552659986.913  0.224->: event subscribe 6
+1552659986.918  0.228->: event get
+1552659986.921  0.231<-: event 1
+1552659986.922  0.232->: joy subscribe 1
+1552659986.926  0.237->: joy get
+1552659986.930  0.241->: wve subscribe 2
+1552659986.934  0.245->: mca subscribe 2
+1552659986.939  0.249->: mis subscribe 2
+1552659986.943  0.253->: hbt subscribe 1
+1552659986.947  0.257->: rid subscribe 3
+1552659986.951  0.262->: robot u4
+1552659986.955  0.266->: irc subscribe 1
+1552659986.959  0.270->: robot sub 1 1 2
+1552659986.963  0.274<-: pse 0.792321 -1.38371 -1.42569 2.01418 -0.0362673
+1552659986.963  0.274->: acw subscribe 1
+1552659986.968  0.278->: gyw subscribe 1
+1552659986.972  0.282->: robot sub 1 1 4
+1552659986.976  0.287->: robot sub 1 1 5
+1552659986.980  0.291->: start
+1552659986.980  0.291<-: joy 1 0 8 11 0 -2 -32767 0 -2 -32767 0 0 0 0 0 0 0 0 0 0 0 0 0
+1552659986.995  0.305<-: rid 86 0.21 9.68 48 0.045 0.045 0 1 9.89407 6 Thit
+1552659987.010  0.320<-: irc 10.000 10.000 472 73143 72000 24096 72296 24096 0 1
+1552659987.012  0.323<-: event 33
+1552659987.025  0.336->: cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06
+1552659987.028  0.339<-: wve -0 0
+1552659987.039  0.350->: stop
+1552659987.043  0.354<-: lip 0 1 0.0000 20 0.0000 20 1 44 44 0 0 0 0 4.5 1 0
+1552659987.044  0.354->: stop
+1552659987.057  0.367<-: acw 0.357222 -0.0839111 -9.77684

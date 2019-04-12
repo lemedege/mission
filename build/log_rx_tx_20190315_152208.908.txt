@@ -1,0 +1,85 @@
+% log of messages transmitted to brudge (outgoing) (<-)
+% received from bridge (incoming) (->)
+% 1 Linux timestamp (seconds since 1 jan 1970)
+% 2 mission time (sec)
+% 3 direction flag ->: or <-:
+% 4 string send or received
+1552659728.908  0.002->: Connected to bridge  1
+1552659728.942  0.036->: robot stop
+1552659728.947  0.040->: robot <clear
+1552659728.951  0.044->: robot <add thread=1
+1552659728.955  0.048->: robot <add irsensor=1,vel=0:dist=0.2
+1552659728.959  0.053->: robot <add thread=100,event=30 : event=31
+1552659728.963  0.057->: robot <add vel=0 : time=0.1
+1552659728.968  0.061->: robot <add vel=0 : time=0.1
+1552659728.972  0.065->: robot <add vel=0 : time=0.1
+1552659728.976  0.069->: robot <add vel=0 : time=0.1
+1552659728.980  0.074->: robot <add vel=0 : time=0.1
+1552659728.984  0.078->: robot <add vel=0 : time=0.1
+1552659728.988  0.082->: robot <add vel=0 : time=0.1
+1552659728.991  0.085<-: # Welcome to REGBOT bridge - send 'help' for more info
+1552659728.993  0.086->: robot <add vel=0 : time=0.1
+1552659728.993  0.087<-: bridge
+1552659728.997  0.090->: robot <add vel=0 : time=0.1
+1552659729.001  0.094->: robot <add vel=0 : time=0.1
+1552659729.005  0.099->: robot <add vel=0 : time=0.1
+1552659729.009  0.103->: robot <add vel=0 : time=0.1
+1552659729.013  0.107->: robot <add vel=0 : time=0.1
+1552659729.017  0.111->: robot <add vel=0 : time=0.1
+1552659729.022  0.115->: robot <add vel=0 : time=0.1
+1552659729.026  0.119->: robot <add thread=101,event=31 : event=30
+1552659729.030  0.123->: robot <add vel=0 : time=0.1
+1552659729.034  0.128->: robot <add vel=0 : time=0.1
+1552659729.038  0.132->: robot <add vel=0 : time=0.1
+1552659729.043  0.136->: robot <add vel=0 : time=0.1
+1552659729.047  0.140->: robot <add vel=0 : time=0.1
+1552659729.051  0.144->: robot <add vel=0 : time=0.1
+1552659729.055  0.149->: robot <add vel=0 : time=0.1
+1552659729.059  0.153->: robot <add vel=0 : time=0.1
+1552659729.064  0.157->: robot <add vel=0 : time=0.1
+1552659729.068  0.161->: robot <add vel=0 : time=0.1
+1552659729.072  0.166->: robot <add vel=0 : time=0.1
+1552659729.076  0.170->: robot <add vel=0 : time=0.1
+1552659729.080  0.174->: robot <add vel=0 : time=0.1
+1552659729.085  0.178->: robot <add vel=0 : time=0.1
+1552659729.089  0.182->: robot <add vel=0 : time=0.1
+1552659729.107  0.200->: pse subscribe 1
+1552659729.113  0.206->: lip subscribe 1
+1552659729.117  0.211->: wve subscribe 2
+1552659729.121  0.215->: mca subscribe 2
+1552659729.126  0.219->: event subscribe 6
+1552659729.130  0.223->: event get
+1552659729.133  0.226<-: event 1
+1552659729.134  0.227->: joy subscribe 1
+1552659729.138  0.232->: joy get
+1552659729.142  0.236->: wve subscribe 2
+1552659729.146  0.240->: mca subscribe 2
+1552659729.151  0.244->: mis subscribe 2
+1552659729.155  0.248->: hbt subscribe 1
+1552659729.159  0.252->: rid subscribe 3
+1552659729.163  0.257->: robot u4
+1552659729.167  0.261->: irc subscribe 1
+1552659729.171  0.265->: robot sub 1 1 2
+1552659729.175  0.269->: acw subscribe 1
+1552659729.186  0.279->: gyw subscribe 1
+1552659729.188  0.282<-: mca 0 -0
+1552659729.190  0.283->: robot sub 1 1 4
+1552659729.194  0.288->: robot sub 1 1 5
+1552659729.198  0.292->: start
+1552659729.206  0.300<-: joy 1 0 8 11 0 -2 -32767 0 -2 -32767 0 0 0 0 0 0 0 0 0 0 0 0 0
+1552659729.220  0.314<-: rid 86 0.21 9.68 48 0.045 0.045 0 1 9.89407 6 Thit
+1552659729.233  0.327<-: pse 0.794075 -1.4577 -1.36194 2.01358 -0.0327196
+1552659729.261  0.355<-: event 33
+1552659729.273  0.366->: <mod 101 1 vel=1.0, acc=3.0, edgel=0.0, white=1: dist=4
+1552659729.277  0.371<-: irc 0.364 0.314 30385 34135 72000 24096 72296 24096 1 1
+1552659729.277  0.371->: <mod 101 2 vel=0.0, acc=1000.0:time=1
+1552659729.281  0.375->: <mod 101 3 event=1:time=1.1
+1552659729.292  0.385<-: lip 0 1 0.0000 20 0.0000 20 1 44 44 0 0 0 0 4.5 1 0
+1552659729.300  0.394<-: acw 0.366812 -0.189399 -9.76726
+1552659729.306  0.399->: <event=31
+1552659729.317  0.411<-: gyw 0.183105 0.0610352 0.335693
+1552659729.320  0.413<-: wve 0 -0
+1552659729.340  0.434->: stop
+1552659729.344  0.437<-: event 31
+1552659729.344  0.438->: stop
+1552659729.356  0.450<-: hbt 0.121 11.5556 0 7 0 239

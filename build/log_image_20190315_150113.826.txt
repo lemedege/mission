@@ -1,0 +1,5 @@
+% data log started at 2019-03-15 15:01:12.462
+% 1 Time [sec]
+% 2 Regbot time [sec]
+% 3 image number
+% 4 image file name

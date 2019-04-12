@@ -1,0 +1,82 @@
+% log of messages transmitted to brudge (outgoing) (<-)
+% received from bridge (incoming) (->)
+% 1 Linux timestamp (seconds since 1 jan 1970)
+% 2 mission time (sec)
+% 3 direction flag ->: or <-:
+% 4 string send or received
+1552663822.288  0.001->: Connected to bridge  1
+1552663822.318  0.031->: robot stop
+1552663822.322  0.035->: robot <clear
+1552663822.326  0.039->: robot <add thread=1
+1552663822.330  0.044->: robot <add irsensor=1,vel=0:dist=0.2
+1552663822.334  0.048->: robot <add thread=100,event=30 : event=31
+1552663822.338  0.052->: robot <add vel=0 : time=0.1
+1552663822.343  0.056->: robot <add vel=0 : time=0.1
+1552663822.347  0.060->: robot <add vel=0 : time=0.1
+1552663822.351  0.064->: robot <add vel=0 : time=0.1
+1552663822.355  0.068->: robot <add vel=0 : time=0.1
+1552663822.359  0.072->: robot <add vel=0 : time=0.1
+1552663822.363  0.077->: robot <add vel=0 : time=0.1
+1552663822.367  0.081->: robot <add vel=0 : time=0.1
+1552663822.371  0.085->: robot <add vel=0 : time=0.1
+1552663822.376  0.089->: robot <add vel=0 : time=0.1
+1552663822.380  0.093->: robot <add vel=0 : time=0.1
+1552663822.384  0.097->: robot <add vel=0 : time=0.1
+1552663822.388  0.102->: robot <add vel=0 : time=0.1
+1552663822.390  0.103<-: # Welcome to REGBOT bridge - send 'help' for more info
+1552663822.392  0.105<-: bridge
+1552663822.392  0.106->: robot <add vel=0 : time=0.1
+1552663822.397  0.110->: robot <add vel=0 : time=0.1
+1552663822.401  0.114->: robot <add thread=101,event=31 : event=30
+1552663822.405  0.118->: robot <add vel=0 : time=0.1
+1552663822.409  0.122->: robot <add vel=0 : time=0.1
+1552663822.413  0.126->: robot <add vel=0 : time=0.1
+1552663822.417  0.131->: robot <add vel=0 : time=0.1
+1552663822.421  0.135->: robot <add vel=0 : time=0.1
+1552663822.426  0.139->: robot <add vel=0 : time=0.1
+1552663822.430  0.143->: robot <add vel=0 : time=0.1
+1552663822.434  0.147->: robot <add vel=0 : time=0.1
+1552663822.438  0.152->: robot <add vel=0 : time=0.1
+1552663822.442  0.156->: robot <add vel=0 : time=0.1
+1552663822.447  0.160->: robot <add vel=0 : time=0.1
+1552663822.451  0.164->: robot <add vel=0 : time=0.1
+1552663822.455  0.168->: robot <add vel=0 : time=0.1
+1552663822.459  0.173->: robot <add vel=0 : time=0.1
+1552663822.463  0.177->: robot <add vel=0 : time=0.1
+1552663822.478  0.191->: pse subscribe 1
+1552663822.482  0.195->: lip subscribe 1
+1552663822.486  0.199->: wve subscribe 2
+1552663822.490  0.204->: mca subscribe 2
+1552663822.495  0.208->: event subscribe 6
+1552663822.499  0.212->: event get
+1552663822.503  0.216->: joy subscribe 1
+1552663822.507  0.221->: joy get
+1552663822.511  0.225->: wve subscribe 2
+1552663822.512  0.225<-: pse 1.93518 -0.390185 -0.0898294 2.00049 -0.635468
+1552663822.514  0.228<-: event 1
+1552663822.516  0.229->: mca subscribe 2
+1552663822.517  0.230<-: wve -0 0
+1552663822.520  0.233->: mis subscribe 2
+1552663822.524  0.237->: hbt subscribe 1
+1552663822.528  0.241->: rid subscribe 3
+1552663822.532  0.246->: robot u4
+1552663822.534  0.248<-: joy 1 0 8 11 0 0 -32767 0 -2 -32767 0 0 0 0 0 0 0 0 0 0 0 0 0
+1552663822.536  0.250->: irc subscribe 1
+1552663822.541  0.254->: robot sub 1 1 2
+1552663822.545  0.258->: acw subscribe 1
+1552663822.549  0.262->: gyw subscribe 1
+1552663822.553  0.266->: robot sub 1 1 4
+1552663822.557  0.271->: robot sub 1 1 5
+1552663822.561  0.275->: start
+1552663822.563  0.276<-: lip 0 1 0.0000 0 0.0000 0 1 44 44 0 0 0 0 4.5 1 0
+1552663822.585  0.298<-: rid 86 0.21 9.68 48 0.045 0.045 0 1 9.89407 6 Thit
+1552663822.593  0.307<-: acw 5.91214 0.0743213 -7.84449
+1552663822.625  0.339<-: event 33
+1552663822.634  0.348<-: gyw 0.701904 -0.12207 0.793457
+1552663822.636  0.350->: cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06
+1552663822.640  0.354->: eew
+1552663822.642  0.355<-: hbt 0.039 11.3341 0 6 0 241
+1552663822.644  0.358<-: mca 0 -0
+1552663822.655  0.368->: stop
+1552663822.659  0.372->: stop
+1552663822.669  0.383<-: pse 1.93518 -0.390185 -0.0898294 2.00049 -0.635428
