@@ -1,0 +1,15 @@
+thread=1
+label=12
+servo=2,pservo=700:time=1
+servo=2,pservo=700,vel=-0.3,acc=2:time=2
+tr=-0.2:time=3
+tr=0.2:time=3
+servo=2,pservo=-700,vel=-0.5,acc=0.5:dist=0.35
+vel=0,acc=100:time=1
+servo=2,pservo=700
+vel=0.2,tr=0.1:turn=105
+vel=0.4,tr=0.34:turn=340
+vel=0.4,tr=0.0:turn=-70
+vel=0.4,white=1,edgel=2.0:xl>8
+vel=0,acc=100:time=1
+goto=12
