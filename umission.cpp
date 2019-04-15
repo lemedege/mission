@@ -350,8 +350,7 @@ switch (state)
 {
     case 0: // Gullutione port
     printf("running mission part 3\n"); 
-	bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
-    snprintf(lines[0], MAX_LEN, "vel=0.4,acc=1.0,edger=2.0,white=1:dist=6");
+	snprintf(lines[0], MAX_LEN, "vel=0.4,acc=1.0,edger=2.0,white=1:dist=6");
     // last line should never end, as robot then think we are finished
     // so therefore a timeout of 1 second, to allow next set of
     // commands to be delivered
