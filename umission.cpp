@@ -167,7 +167,7 @@ int state = 0;
 bool ended = false;
 bool inManuel = false;
 int loop = 0;
-int missionState = 0;
+int missionState = 2;
 // initialize robot mission to do nothing (wait for mission lines)
 missionInit();
 bot->send("start\n"); // ask robot to start controlled run (ready to execute)
@@ -200,7 +200,7 @@ while (not finished and not th1stop)
         }
         break;
         case 1: // running auto mission
-           // ended = mission1(missionState);
+           ended = mission1(missionState);
         break;
         
         
