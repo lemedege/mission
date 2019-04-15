@@ -167,7 +167,7 @@ int state = 0;
 bool ended = false;
 bool inManuel = false;
 int loop = 0;
-int missionState = 1;
+int missionState = 2;
 // initialize robot mission to do nothing (wait for mission lines)
 missionInit();
 bot->send("start\n"); // ask robot to start controlled run (ready to execute)
@@ -350,7 +350,8 @@ switch (state)
 {
     case 0: // Gullutione port
     printf("running mission part 3\n"); 
-    snprintf(lines[0], MAX_LEN, "vel=0.4, acc=1.0, edger=2.0, white=1: dist=60");
+	bot->send("cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+    snprintf(lines[0], MAX_LEN, "vel=0.4,acc=1.0,edger=2.0,white=1:dist=6");
     // last line should never end, as robot then think we are finished
     // so therefore a timeout of 1 second, to allow next set of
     // commands to be delivered
@@ -396,7 +397,7 @@ switch (state)
     // so therefore a timeout of 1 second, to allow next set of
     // commands to be delivered
     snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-    missionSendAndRun(lineList, 2);
+    missionSendAndRun(lineList, 3);
     state++;
     break;
     case 1: //Gullutione port + ramp up 
