@@ -199,33 +199,26 @@ while (not finished and not th1stop)
             state = mission;
         }
         break;
-        case 1:
-            bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
-	//bot->send("eew\n\0");
-                    ended = true;
-                    break;
-        case 2: // running auto mission
-            ended = racetrack(missionState);
+        case 1: // running auto mission
+            ended = mission1(missionState);
         break;
         
-        case 3:
-            bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
-	//bot->send("eew\n\0");            
-ended = true;
+        
+            case 2:
+            ended= mission2(missionState);
             break;
             
-            case 4:
-            ended= racetrack2(missionState);
-            break;
-            
-            case 5:
-                    bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
-	//bot->send("eew\n\0");                   
- ended = true;
-    break;
-			case 6:
-				ended = axeGate(missionState);
+         
+			case 3:
+				ended = mission3(missionState);
 			break;
+			case 4:
+				ended = mission4(missionState);
+			break;
+			case 5:
+				ended = mission5(missionState);
+			break;
+
 
 
 
@@ -1034,7 +1027,7 @@ switch (state)
 			state++;
 			break;
 		
-		case 141	
+		case 141:	
 			if (bot->event->eventSet(1))
 			{ // finished first drive
 				state = 150;
@@ -1069,7 +1062,7 @@ switch (state)
 			state++;
 			break;
 		
-		case 161	
+		case 161:	
 			if (bot->event->eventSet(1))
 			{ // finished first drive
 				state = 170;
@@ -1077,7 +1070,7 @@ switch (state)
 			}
 			break;
 			
-		case 170: fra racebane til cirkel3     
+		case 170: //fra racebane til cirkel3     
                 snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
                 snprintf(lines[1], MAX_LEN, "vel=0.4,acc=4,edger=0.0,white=1:dist=2.3");
                 snprintf(lines[2], MAX_LEN, "vel=0,acc=1000:time=1");
@@ -1099,7 +1092,7 @@ switch (state)
                 }
                 break;
 				
-		case 180: rundt i cirkel3     
+		case 180: //rundt i cirkel3     
                 snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=0.2");
                 snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=120");
                 snprintf(lines[2], MAX_LEN, "tr=0.32,vel=0.3,acc=3:turn=260");
@@ -1121,7 +1114,7 @@ switch (state)
                 }
                 break;
 				
-		case 190: rundt i cirkel3 op til axe gate     
+		case 190: //rundt i cirkel3 op til axe gate     
                 snprintf(lines[0], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
                 snprintf(lines[1], MAX_LEN, "vel=0.4,acc=6:dist=0.1");
                 snprintf(lines[2], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
@@ -1141,7 +1134,7 @@ switch (state)
                 }
                 break;
 				
-		case 200: rundt i cirkel3     
+		case 200: //rundt i cirkel3     
                 snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : ir2<0.2,dist=0.45");
                 snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
                 snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0:ir2<0.21");
