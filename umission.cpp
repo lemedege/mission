@@ -167,7 +167,7 @@ int state = 0;
 bool ended = false;
 bool inManuel = false;
 int loop = 0;
-int missionState = 2;
+int missionState = 0;
 // initialize robot mission to do nothing (wait for mission lines)
 missionInit();
 bot->send("start\n"); // ask robot to start controlled run (ready to execute)
@@ -288,14 +288,16 @@ switch (state)
     break;
     case 1: // first PART 
     snprintf(lines[0], MAX_LEN, "vel=0 : ir2 < 0.3");
-    snprintf(lines[1], MAX_LEN, "vel=0.3,acc=2:dist=0.6");
+    /*snprintf(lines[1], MAX_LEN, "vel=0.3,acc=2:dist=0.6");
     snprintf(lines[2], MAX_LEN, "tr=0.2:turn=90,time=10");
     // last line should never end, as robot then think we are finished
     // so therefore a timeout of 1 second, to allow next set of
     // commands to be delivered
     snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
     snprintf(lines[4], MAX_LEN, "vel=0: dist=0.5");
-    missionSendAndRun(lineList, 5);
+	*/
+	snprintf(lines[1], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 2);
     // make sure event 1 is cleared
     bot->event->eventSet(1);
     state++;
@@ -304,8 +306,8 @@ switch (state)
     // wait for event 1
     if (bot->event->eventSet(1))
     { // finished first drive
-        state = 10;
-        system("espeak \"Sending code snippet 2.\" -ven+f4 -s130 -a60 2>/dev/null &"); 
+        state = 999;
+        //system("espeak \"Sending code snippet 2.\" -ven+f4 -s130 -a60 2>/dev/null &"); 
     }
     break;
     case 10: // go back to start position and stop
