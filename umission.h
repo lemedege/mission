@@ -116,10 +116,12 @@ private:
 
   bool mission3(int & state);
 
+  bool mission4(int & state);
+  
 
-  bool racetrack(int & state);
-  bool racetrack2(int & state);
-  bool axeGate(int & state);
+  bool mission5(int & state);
+
+
   
   bool setRacing(int & state);
 
