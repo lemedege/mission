@@ -214,10 +214,10 @@ while (not finished and not th1stop)
             ended = trappedims(missionState);
         break;
 		
-		case 3: // fra trappe i mål
-            ended = trappetogoal(missionState);
-        break;
-		/*
+		//case 3: // fra trappe i mål
+          //  ended = trappetogoal(missionState);
+        //break;
+		
 		case 3: // fra trappe til reg
             ended = trappetoreg(missionState);
         break;
@@ -226,7 +226,7 @@ while (not finished and not th1stop)
             ended = regtogoal(missionState);
         break;
 		
-		case 4: // reg til tunnel
+		/*case 4: // reg til tunnel
             ended = regtotunel(missionState);
         break;
 		
