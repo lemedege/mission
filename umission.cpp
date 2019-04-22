@@ -206,10 +206,10 @@ while (not finished and not th1stop)
                     ended = true;
                     break;
 					
-        case 2: // direkte i mål
+        /*case 2: // direkte i mål
             ended = starttogoal(missionState);
         break;
-		
+		*/
 		case 2: // i mål med 8 point
             ended = trappedims(missionState);
         break;
