@@ -199,34 +199,45 @@ while (not finished and not th1stop)
             state = mission;
         }
         break;
-        case 1:
+		
+		case 1:
             bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
 	//bot->send("eew\n\0");
                     ended = true;
                     break;
         case 2: // running auto mission
+            ended = axeGate(missionState);
+        break;
+		
+		/*
+        case 10:
+            bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
+	//bot->send("eew\n\0");
+                    ended = true;
+                    break;
+        case 11: // running auto mission
             ended = racetrack(missionState);
         break;
         
-        case 3:
+        case 12:
             bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
 	//bot->send("eew\n\0");            
 ended = true;
             break;
             
-            case 4:
+            case 13:
             ended= racetrack2(missionState);
             break;
             
-            case 5:
+            case 14:
                     bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
 	//bot->send("eew\n\0");                   
  ended = true;
     break;
-			case 6:
+			case 15:
 				ended = axeGate(missionState);
 			break;
-
+*/
 
 
         
@@ -501,14 +512,16 @@ bool UMission::axeGate(int & state)
 	switch (state)
 	{
 	case 0: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.4, acc=2.0, edgel=0.0, white=1: dist=0.4,ir2<0.2");
-		snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
-		snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:ir2<0.21");
-		snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5.0, edgel=0.0, white=1:ir2>0.4");
-		snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5, edgel=0.0, white=1:time=0.1");
-		snprintf(lines[5], MAX_LEN, "vel=0.5,acc=5, edgel=0.0, white=1:xl>16,ir2<0.25");
-		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:time=0.1");
-		missionSendAndRun(lineList, 7);
+		snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : ir2<0.2,dist=0.45");
+		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0:ir2<0.21");
+		snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5:ir2>0.4");
+		snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5:time=0.1");
+		snprintf(lines[5], MAX_LEN, "vel=0.5,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		snprintf(lines[7], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+		snprintf(lines[8], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 :dist=3");
+		missionSendAndRun(lineList, 9);
 		state++;
 		break;
 	case 1: 
