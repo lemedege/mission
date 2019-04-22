@@ -693,8 +693,8 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
 	case 0: //Through Gate
 		snprintf(lines[0], MAX_LEN, "tr=0.10,vel=0.3,acc=1:turn=-90");
 		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
-		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=2,edgel=0.0, white=1 : dist=0.3");
-		snprintf(lines[3], MAX_LEN, "vel=0.5,acc=2.0, edger=0.0, white=1:xl>18");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=2,edgel=0.0, white=1 : dist=0.25");
+		snprintf(lines[3], MAX_LEN, "vel=0.2,acc=2.0, edger=0.0, white=1:xl>16");
 		snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0:time=0.1");
 		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
 		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
