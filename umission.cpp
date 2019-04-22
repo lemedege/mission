@@ -889,8 +889,8 @@ bool UMission::tunel(int & state) // trough tunnel closing doors a
 		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edgel=0.0,white=1:dist=0.65");
                 snprintf(lines[1], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
                 snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.27");
-                snprintf(lines[3], MAX_LEN, "tr=0.3,vel=0.3,acc=3:turn=-90");
-                snprintf(lines[4], MAX_LEN, "vel=0.5,acc=5:dist=1.05");
+                snprintf(lines[3], MAX_LEN, "tr=0.1,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[4], MAX_LEN, "vel=0.3,acc=5:dist=0.95");
 				snprintf(lines[5], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
 				snprintf(lines[6], MAX_LEN, "vel=0.3,acc=5,white=1:dist=0.2");
 				snprintf(lines[7], MAX_LEN, "vel=0.45,acc=5,white=1:xl>18");
