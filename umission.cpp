@@ -1003,7 +1003,7 @@ switch (state)
     snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:dist=2.28");
     snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
     snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-24");
-	snprintf(lines[3], MAX_LEN, "vel=-0.1,acc=3:dist=0.5");
+	snprintf(lines[3], MAX_LEN, "vel=-0.1,acc=3:dist=0.05");
 	snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
 	snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
     missionSendAndRun(lineList, 6);
@@ -1031,9 +1031,9 @@ bool finished = false;
 switch (state)
 {
     case 0: //race track 
-    snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2,edger=0.0,white=1:dist=0.2");
-                snprintf(lines[1], MAX_LEN, "vel=1.0,acc=4,edgel=0.0,white=1:dist=0.2");
-                snprintf(lines[2], MAX_LEN, "vel=2.0,acc=8,edgel=0.0,white=1:xl>8");
+    snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2,edger=0.0,white=1:dist=0.3");
+                snprintf(lines[1], MAX_LEN, "vel=1.0,acc=4,edgel=0.0,white=1:dist=0.3");
+                snprintf(lines[2], MAX_LEN, "vel=2.0,acc=4,edgel=0.0,white=1:xl>8");
                 snprintf(lines[3], MAX_LEN, "vel=2.0,acc=5,edgel=0.0,white=1:dist=3");
                 snprintf(lines[4], MAX_LEN, "vel=0,acc=1000:time=1");
 				snprintf(lines[5], MAX_LEN, "vel=0.3,acc=8,edgel=0.0,white=1:xl>16");
