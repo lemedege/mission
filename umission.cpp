@@ -218,6 +218,10 @@ while (not finished and not th1stop)
           //  ended = trappetogoal(missionState);
         //break;
 		
+		case 2
+		break;
+		
+		
 		case 3: // fra trappe til reg
             ended = trappetoreg(missionState);
         break;
