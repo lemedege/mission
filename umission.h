@@ -129,6 +129,8 @@ private:
   bool cirkel(int & state); 
   bool cirkeltogoal(int & state);
   bool regtogoal(int & state);
+  bool regtotunel(int & state);
+  bool tunel(int & state);
   bool setNormal(int & state);
 
 private:
