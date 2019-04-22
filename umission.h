@@ -118,11 +118,16 @@ private:
 
 
   bool racetrack(int & state);
-  bool racetrack2(int & state);
+  bool tuneltoracetrack(int & state);
   bool axeGate(int & state);
   bool starttogoal(int & state);
   bool setRacing(int & state);
-
+  bool trappedims(int & state);
+  bool trappetoreg(int & state);
+  bool racetracktocirkel(int & state);
+  bool cirkel(int & state); 
+  bool cirkeltogoal(int & state);
+  bool regtogoal(int & state);
   bool setNormal(int & state);
 
 private:

@@ -206,7 +206,7 @@ while (not finished and not th1stop)
                     ended = true;
                     break;
         case 2: // running auto mission
-            ended = axeGate(missionState);
+            ended = starttogoal(missionState);
         break;
 		
 		/*
@@ -292,7 +292,7 @@ printf("Mission:: all finished\n");
 *              therefore defined as reference with the '&'.
 *              State will be 0 at first call.
 * \returns true, when finished. */
-bool UMission::mission1(int & state)
+bool UMission::mission1(int & state) // ikke pille 
 {
 bool finished = false;
 // First commands to send to robobot in given mission
@@ -358,7 +358,7 @@ return finished;
 *              therefore defined as reference with the '&'.
 *              State will be 0 at first call.
 * \returns true, when finished. */
-bool UMission::mission3(int & state)
+bool UMission::mission3(int & state) // ikke pille gamelt jefffffff
 {
 bool finished = false;
 // First commands to send to robobot in given mission
@@ -477,35 +477,7 @@ return finished;
 }
 
 
-
-bool UMission::racetrack(int & state)
-{
-bool finished = false;
-
-switch (state)
-{
-    case 0: //race track 
-    snprintf(lines[0], MAX_LEN, "vel=0.3, acc=1.0, edgel=0.0, white=1: dist=2");
-    snprintf(lines[1], MAX_LEN, "vel=0.0, acc=1000.0:time=1");
-    snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
-    missionSendAndRun(lineList, 3);
-    state++;
-    break;
-    case 1: //Gullutione port + ramp up 
-    if (bot->event->eventSet(1))
-    { // finished first drive
-        state = 999;
-    }
-    break;
-    case 999:
-    default:
-    finished = true;
-    break;
-}
-return finished;
-}
-
-bool UMission::axeGate(int & state)
+bool UMission::axeGate(int & state) // ikke pille 
 {
 	bool finished = false;
 
@@ -537,8 +509,12 @@ bool UMission::axeGate(int & state)
 	}
 	return finished;
 }
+//____________////////////////////////////////////////////////_____________________________________________________________
 
-bool UMission::starttogoal(int & state)
+
+
+
+bool UMission::starttogoal(int & state) // from start to goal follow line on right 
 {
 	bool finished = false;
 
@@ -547,7 +523,8 @@ bool UMission::starttogoal(int & state)
 	case 0: //Through Gate
 		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=2,edger=1.0, white=1 : dist=25");
 		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
-		missionSendAndRun(lineList, 2);
+		snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 3);
 		state++;
 		break;
 	case 1: 
@@ -556,6 +533,8 @@ bool UMission::starttogoal(int & state)
 			state = 999;
 		}
 		break;
+		
+
 	case 999:
 	default:
 		finished = true;
@@ -565,19 +544,432 @@ bool UMission::starttogoal(int & state)
 }
 
 
-bool UMission::racetrack2(int & state)
+bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned ramp up trappe ned stop 
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.3, acc=2.0, edgel=0.0, white=1: dist=9");
+		snprintf(lines[1], MAX_LEN, "vel=0.4, acc=2.0, edgel=0.0, white=1: xl>16");
+		snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.5,acc=2:turn=90");
+		snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=0.1");
+		snprintf(lines[4], MAX_LEN, "vel=0.2, acc=1.0, edgel=0.0, white=1:dist=1.25");
+		snprintf(lines[5], MAX_LEN, "vel=0.1,acc=5,edgel=0,white=1:lv=0");
+		snprintf(lines[6], MAX_LEN, "vel=0.1, acc=5, edgel=0.0, white=1:dist=0.5");
+		snprintf(lines[7], MAX_LEN, "vel=0,acc=10:time=1");
+		snprintf(lines[8], MAX_LEN, "tr=0.8,vel=0.5,acc=2:turn=-90");
+		snprintf(lines[9], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
+		snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+		state++;
+		break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 10;
+		}
+		break;
+		
+	case 10: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=1,edgel=0,white=1:dist=0.4");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
+		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.2,acc=1:turn=-90");
+		snprintf(lines[4], MAX_LEN, "vel=0.5,acc=5,edger=0.0:dist=2.75");
+		snprintf(lines[5], MAX_LEN, "vel=0,acc=100:time=0.5");
+		snprintf(lines[6], MAX_LEN, "vel=0.1,acc=2,edger=1.0,white=1:xl>16");
+		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.3");
+		snprintf(lines[8], MAX_LEN, "tr=-0.01,vel=0.5,acc=2:turn=-180");
+		snprintf(lines[9], MAX_LEN, "vel=0.3,acc=1,edgel=2.0,white=1:dist=0.2");
+		snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+		state++;
+		break;
+	case 11: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 20;
+		}
+		break;
+		
+	case 20: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.1,acc=5,edgel=0.0,white=1:dist=2");
+		snprintf(lines[1], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[2], MAX_LEN, "vel=0.1,acc=1,edgel=0,white=1:xl>8");
+		snprintf(lines[3], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.1");
+		snprintf(lines[4], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
+		snprintf(lines[5], MAX_LEN, "vel=0,acc=100:time=0.5");
+		snprintf(lines[6], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 7);
+		state++;
+		break;
+	case 21: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::trappetogoal(int & state) // from trappe end to goal
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.2,acc=1:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0.0,white=1:dist=10");
+		snprintf(lines[2], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 3);
+		state++;
+		break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+		
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center)
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "tr=0.00,vel=0.4,acc=1:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		snprintf(lines[2], MAX_LEN, "vel=0.3,acc=2,edgel=0.0, white=1 : dist=0.1");
+		snprintf(lines[3], MAX_LEN, "vel=0.35,acc=2.0, edger=0.0, white=1:xl>16"");
+		snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0:time=0.1");
+		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
+		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		snprintf(lines[7], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : dist=0.3");
+		snprintf(lines[8], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 10);
+		state++;
+		break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 10;
+		}
+		break;
+		
+	case 10: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.0,acc=100.0:ir2<0.21");
+        snprintf(lines[1], MAX_LEN, "vel=0.0,acc=5:ir2>0.4");
+        snprintf(lines[2], MAX_LEN, "vel=0.0,acc=5:time=0.1");
+        snprintf(lines[3], MAX_LEN, "vel=0.5,acc=5, edgel=0.0, white=1:dist=0.5");
+        snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
+		snprintf(lines[5], MAX_LEN, "tr=0.1,vel=0.3,acc=2:turn=90");
+		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=5:time=0.1");
+		snprintf(lines[7], MAX_LEN, "vel=0.5,acc=5:dist=0.55");
+		snprintf(lines[8], MAX_LEN, "vel=0.0, acc=100.0:time=0.1");
+        snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 10);
+        state++;
+        break;
+	case 11: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 20;
+		}
+		break;
+		
+	case 20: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.0,acc=100.0:ir2<0.4");
+        snprintf(lines[1], MAX_LEN, "vel=0.0,acc=5.0:ir2>0.6");
+        snprintf(lines[2], MAX_LEN, "vel=0.0,acc=5:time=0.5");
+        snprintf(lines[3], MAX_LEN, "vel=0.35,acc=5:lv=1");
+        snprintf(lines[4], MAX_LEN, "tr=0.0,vel=0.5,acc=2:turn=90");
+		snprintf(lines[5], MAX_LEN, "vel=0.0,acc=5:time=0.5");
+		snprintf(lines[6], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[7], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
+		snprintf(lines[8], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+        snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 10);
+        state++;
+        break;
+	case 21: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 30;
+		}
+		break;
+		
+	case 30: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
+        snprintf(lines[1], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+        snprintf(lines[2], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
+        snprintf(lines[3], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+        snprintf(lines[4], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
+		snprintf(lines[5], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[6], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
+		snprintf(lines[7], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.3");
+		snprintf(lines[8], MAX_LEN, "vel=0.3, acc=2.0, edger=0.0, white=1:dist=0.7");
+		snprintf(lines[9], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-180");
+		snprintf(lines[10], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
+        snprintf(lines[11], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 12);
+        state++;
+        break;
+	case 31: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+		
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::regtogoal(int & state) // from regbot to goal
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.55, acc=3.0, edger=1.0, white=1: dist=0.35");
+        snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
+        snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:ir2<0.4");
+        snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5.0, edgel=0.0, white=1:ir2>0.6");
+        snprintf(lines[4], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
+		snprintf(lines[6], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[7], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[8], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
+		snprintf(lines[9], MAX_LEN, "vel=0.55, acc=3.0, edger=1.0, white=1: dist=4");
+        snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+        state++;
+        break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+		
+	
+		
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::regtotunel(int & state) // reg center to tunnel start 
+{
+	
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.55, acc=3.0, edger=1.0, white=1: dist=0.35");
+                snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
+                snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:ir2<0.4");
+                snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5.0, edgel=0.0, white=1:ir2>0.6");
+                snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5, edgel=0.0, white=1:time=0.5");
+				snprintf(lines[5], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+				snprintf(lines[6], MAX_LEN, "vel=0.2,acc=5.0, edgel=0.0, white=1:ir2<0.25");
+				snprintf(lines[7], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
+                snprintf(lines[8], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 9);
+                state++;
+                break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+		
+	
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::tunel(int & state) // trough tunnel closing doors a
+{
+	bool finished = false;
+
+	switch (state)
+	{
+		
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
+                snprintf(lines[1], MAX_LEN, "vel=0.3,acc=3:dist=0.50");
+                snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[3], MAX_LEN, "vel=0.3,acc=3:dist=0.40");
+                snprintf(lines[4], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[5], MAX_LEN, "vel=0.2,acc=3,edgel=0.0,white=1:ir2<0.20");
+				snprintf(lines[6], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[7], MAX_LEN, "vel=0.3,acc=3:dist=0.20");
+				snprintf(lines[8], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=90,xl>16");
+				snprintf(lines[9], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=90");
+				snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+                state++;
+                break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 20;
+		}
+		break;
+		
+	case 20: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edgel=0.0,white=1:dist=0.65");
+                snprintf(lines[1], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.27");
+                snprintf(lines[3], MAX_LEN, "tr=0.3,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[4], MAX_LEN, "vel=0.5,acc=5:dist=1.05");
+				snprintf(lines[5], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[6], MAX_LEN, "vel=0.3,acc=5,white=1:dist=0.2");
+				snprintf(lines[7], MAX_LEN, "vel=0.3,acc=5,white=1:xl>18");
+				snprintf(lines[8], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[9], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
+				snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+        state++;
+        break;
+	case 21: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 30;
+		}
+		break;
+		
+	case 30: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[1], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
+                snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.50");
+                snprintf(lines[3], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[4], MAX_LEN, "vel=0.3,acc=3:dist=0.95");
+				snprintf(lines[5], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[6], MAX_LEN, "vel=0.3,acc=5,white=1:xl>18");
+				snprintf(lines[7], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[8], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
+				snprintf(lines[9], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+        snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
+        state++;
+        break;
+	case 31: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 40;
+		}
+		break;
+	
+	case 40: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=180");
+                snprintf(lines[1], MAX_LEN, "vel=-0.2,acc=30:time=4");
+				snprintf(lines[2], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.5");
+                snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 4);
+        state++;
+        break;
+	case 41: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+bool UMission::tuneltoracetrack(int & state) // to racetrack from tunnel 
 {
 bool finished = false;
 
 switch (state)
 {
     case 0: //race track 
-    snprintf(lines[0], MAX_LEN, "vel=2.0, acc=3, edgel=0.0, white=1 xl>12");
-    snprintf(lines[1], MAX_LEN, "vel=2.0, acc=5.0, edgel=0.0, white=1: dist=2");
-    snprintf(lines[2], MAX_LEN, "vel=1.8, acc=1.0, edgel=0.0, white=1: xl>12");
-    snprintf(lines[3], MAX_LEN, "vel=0.0, acc=1000.0:time=1");
-    snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
-    missionSendAndRun(lineList, 5);
+    snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edger=0.0,white=1:dist=2.28");
+    snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
+    snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-24");
+	snprintf(lines[3], MAX_LEN, "vel=-0.1,acc=3:dist=0.15");
+	snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
+	snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 6);
+    state++;
+    break;
+    case 1: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 999;
+    }
+    break;
+    case 999:
+    default:
+    finished = true;
+    break;
+}
+return finished;
+}
+
+
+bool UMission::racetrack(int & state) // racetrack 
+{
+bool finished = false;
+
+switch (state)
+{
+    case 0: //race track 
+    snprintf(lines[0], MAX_LEN, "vel=0.4,acc=4,edger=2.0,white=1:dist=0.2");
+                snprintf(lines[1], MAX_LEN, "vel=1.0,acc=4,edgel=0.0,white=1:dist=0.2");
+                snprintf(lines[2], MAX_LEN, "vel=2.0,acc=8,edgel=0.0,white=1:xl>8");
+                snprintf(lines[3], MAX_LEN, "vel=2.0,acc=5,edgel=0.0,white=1:dist=3");
+                snprintf(lines[4], MAX_LEN, "vel=0,acc=1000:time=1");
+				snprintf(lines[5], MAX_LEN, "vel=0.3,acc=8,edgel=0.0,white=1:xl>16");
+				snprintf(lines[6], MAX_LEN, "vel=0,acc=1000:time=1");
+    snprintf(lines[7], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 8);
     state++;
     break;
         case 1:
@@ -597,8 +989,169 @@ return finished;
 }
 
 
+bool UMission::racetracktocirkel(int & state) // from racetrack to cirkel 
+{
+bool finished = false;
+
+switch (state)
+{
+    case 0: //race track 
+   snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[1], MAX_LEN, "vel=0.4,acc=4,edger=0.0,white=1:dist=2.3");
+                snprintf(lines[2], MAX_LEN, "vel=0,acc=1000:time=1");
+                snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.25,acc=3:turn=180");
+                snprintf(lines[4], MAX_LEN, "vel=0,acc=1000:time=1");
+				snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 6);
+    state++;
+    break;
+    case 1: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 999;
+    }
+    break;
+    case 999:
+    default:
+    finished = true;
+    break;
+}
+return finished;
+}
+
+bool UMission::cirkel(int & state) // from racetrack to cirkel 
+{
+bool finished = false;
+
+switch (state)
+{
+    case 0:
+   snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=1.0");
+				snprintf(lines[1], MAX_LEN, "vel=-0.4,acc=6:time=1.5");
+				snprintf(lines[2], MAX_LEN, "vel=-0.4,acc=5,servo=2,pservo=-700:time=5,dist=0.33");
+				snprintf(lines[3], MAX_LEN, "vel=0,acc=1000:time=0.1");
+				snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 5);
+    state++;
+    break;
+    case 1: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 10;
+    }
+    break;
+	
+	case 10: 
+   snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=0.2");
+                snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=120");
+                snprintf(lines[2], MAX_LEN, "tr=0.32,vel=0.3,acc=3:turn=260");
+                snprintf(lines[3], MAX_LEN, "vel=0.0,acc=100:time=0.5");
+                snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 5);
+                state++;
+                break;
+    case 11: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 10;
+    }
+    break;
+	
+	
+    case 999:
+    default:
+    finished = true;
+    break;
+}
+return finished;
+}
 
 
+bool UMission::cirkeltogoal(int & state) // from cirkel to goal 
+{
+bool finished = false;
+
+switch (state)
+{
+    case 0:
+   snprintf(lines[0], MAX_LEN, "vel=0.4,acc=6:dist=0.6");
+                snprintf(lines[1], MAX_LEN, "vel=0.2,acc=4:lv=0");
+				snprintf(lines[2], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
+				snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+				snprintf(lines[4], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
+				snprintf(lines[5], MAX_LEN, "vel=0.4,acc=6:dist=0.1");
+				snprintf(lines[6], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 7);
+                state++;
+                break;
+    case 1: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 10;
+    }
+    break;
+	
+	case 10: 
+   snprintf(lines[0], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
+                snprintf(lines[1], MAX_LEN, "vel=0.4,acc=6:dist=0.1");
+                snprintf(lines[2], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
+                snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+                snprintf(lines[4], MAX_LEN, "vel=0.4,acc=6:dist=0.9");
+				snprintf(lines[5], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:xl>4");
+				snprintf(lines[6], MAX_LEN, "vel=0,acc=1000:time=0.1");
+				snprintf(lines[7], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 8);
+                state++;
+                break;
+    case 11: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 20;
+    }
+    break;
+	
+	case 20: 
+   snprintf(lines[0], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : ir2<0.2,dist=0.45");
+                snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+                snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0:ir2<0.21");
+                snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5:ir2>0.4");
+                snprintf(lines[4], MAX_LEN, "vel=0.0,acc=5:time=0.1");
+				snprintf(lines[5], MAX_LEN, "vel=0.5,acc=5, edgel=0.0, white=1:xl>16,ir2<0.25");
+				snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+				snprintf(lines[7], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
+				snprintf(lines[8], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 :dist=3");
+				snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 10);
+                state++;
+                break;
+    case 21: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 999;
+    }
+    break;
+	
+    case 999:
+    default:
+    finished = true;
+    break;
+}
+return finished;
+}
+
+
+
+
+
+
+
+
+
+
+
+//___________________________________________
+// kun til at ændre parameter
+//______________________________________
 
 bool UMission::setRacing(int & state)
 {
