@@ -205,40 +205,72 @@ while (not finished and not th1stop)
 	//bot->send("eew\n\0");
                     ended = true;
                     break;
-        case 2: // running auto mission
+					
+        case 2: // direkte i mål
             ended = starttogoal(missionState);
         break;
 		
-		/*
-        case 10:
-            bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameters
-	//bot->send("eew\n\0");
-                    ended = true;
-                    break;
-        case 11: // running auto mission
-            ended = racetrack(missionState);
+		case 2: // i mål med 8 point
+            ended = trappedims(missionState);
         break;
-        
-        case 12:
+		
+		case 3: // fra trappe i mål
+            ended = trappetogoal(missionState);
+        break;
+		/*
+		case 3: // fra trappe til reg
+            ended = trappetoreg(missionState);
+        break;
+		
+		case 4: // reg til goal
+            ended = regtogoal(missionState);
+        break;
+		
+		case 4: // reg til tunnel
+            ended = regtotunel(missionState);
+        break;
+		
+		case 5: //  igennem tunel
+            ended = tunel(missionState);
+        break;
+		
+		case 5: // uden om tunel
+            ended = tuneluden(missionState);
+        break;
+		
+		case 6: // tunel til racebanen
+            ended = tuneltoracetrack(missionState);
+        break;
+         
+        case 7:
             bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
 	//bot->send("eew\n\0");            
 ended = true;
             break;
             
-            case 13:
-            ended= racetrack2(missionState);
+            case 8:
+            ended= racetrack(missionState);
             break;
             
-            case 14:
+            case 9:
                     bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
 	//bot->send("eew\n\0");                   
  ended = true;
     break;
-			case 15:
-				ended = axeGate(missionState);
+	
+	
+			case 10:
+				ended = racetracktocirkel(missionState);
+			break;
+			
+			case 11:
+				ended = cirkel(missionState);
+			break;
+		
+			case 12:
+				ended = cirkeltogoal(missionState);
 			break;
 */
-
 
         
         default:
@@ -922,6 +954,45 @@ bool UMission::tunel(int & state) // trough tunnel closing doors a
 	}
 	return finished;
 }
+
+
+bool UMission::tuneluden(int & state) // trough tunnel closing doors a
+{
+	bool finished = false;
+
+	switch (state)
+	{
+		
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
+                snprintf(lines[1], MAX_LEN, "vel=0.3,acc=3:dist=0.50");
+                snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[3], MAX_LEN, "vel=0.3,acc=3:dist=1.1");
+                snprintf(lines[4], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[5], MAX_LEN, "vel=0.2,acc=3,edgel=0.0,white=1:xl>12");
+				snprintf(lines[6], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
+				snprintf(lines[7], MAX_LEN, "vel=-0.1,acc=3,edger=0.0,white=1:time=10");
+				snprintf(lines[8], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 9);
+                state++;
+                break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+		
+	
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
+
+
 
 bool UMission::tuneltoracetrack(int & state) // to racetrack from tunnel 
 {

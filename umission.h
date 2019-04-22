@@ -131,6 +131,7 @@ private:
   bool regtogoal(int & state);
   bool regtotunel(int & state);
   bool tunel(int & state);
+  bool tuneluden(int & state);
   bool setNormal(int & state);
 
 private:
