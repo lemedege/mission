@@ -218,11 +218,10 @@ while (not finished and not th1stop)
           //  ended = trappetogoal(missionState);
         //break;
 		
-		case 2
-		break;
 		
 		
-		case 3: // fra trappe til reg
+		
+		case 2: // fra trappe til reg
             ended = trappetoreg(missionState);
         break;
 		
@@ -230,11 +229,11 @@ while (not finished and not th1stop)
         //    ended = regtogoal(missionState);
         //break;
 		
-		case 4: // reg til tunnel
+		case 3: // reg til tunnel
             ended = regtotunel(missionState);
         break;
 		
-		case 5: //  igennem tunel
+		case 4: //  igennem tunel
             ended = tunel(missionState);
         break;
 		
@@ -242,36 +241,36 @@ while (not finished and not th1stop)
        //     ended = tuneluden(missionState);
      //   break;
 		
-		case 6: // tunel til racebanen
+		case 5: // tunel til racebanen
             ended = tuneltoracetrack(missionState);
         break;
          
-        case 7:
+        case 6:
             bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
 	//bot->send("eew\n\0");            
 ended = true;
             break;
             
-            case 8:
+            case 7:
             ended= racetrack(missionState);
             break;
             
-            case 9:
+            case 8:
                     bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
 	//bot->send("eew\n\0");                   
  ended = true;
     break;
 	
 	
-			case 10:
+			case 9:
 				ended = racetracktocirkel(missionState);
 			break;
 			
-			case 11:
+			case 10:
 				ended = cirkel(missionState);
 			break;
 		
-			case 12:
+			case 11:
 				ended = cirkeltogoal(missionState);
 			break;
 
