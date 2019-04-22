@@ -270,7 +270,7 @@ ended = true;
 			case 12:
 				ended = cirkeltogoal(missionState);
 			break;
-*/
+
 
         
         default:
