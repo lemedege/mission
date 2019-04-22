@@ -739,11 +739,12 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
         snprintf(lines[3], MAX_LEN, "vel=0.35,acc=5:lv=1");
         snprintf(lines[4], MAX_LEN, "tr=0.0,vel=0.5,acc=2:turn=90");
 		snprintf(lines[5], MAX_LEN, "vel=0.0,acc=5:time=0.5");
-		snprintf(lines[6], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-		snprintf(lines[7], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
-		snprintf(lines[8], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-        snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
-				missionSendAndRun(lineList, 10);
+		snprintf(lines[6], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=2.65");
+		snprintf(lines[7], MAX_LEN, "vel=0.25,acc=5, edgel=0.0, white=1:xl>8");
+		snprintf(lines[8], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=5.7");
+		snprintf(lines[9], MAX_LEN, "vel=0.25,acc=5, edgel=0.0, white=1:xl>8");
+        snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 11);
         state++;
         break;
 	case 21: 
@@ -754,19 +755,14 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
 		break;
 		
 	case 30: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
-        snprintf(lines[1], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-        snprintf(lines[2], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
-        snprintf(lines[3], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-        snprintf(lines[4], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=0.2");
-		snprintf(lines[5], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-		snprintf(lines[6], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
-		snprintf(lines[7], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.3");
-		snprintf(lines[8], MAX_LEN, "vel=0.3, acc=2.0, edger=0.0, white=1:dist=0.7");
-		snprintf(lines[9], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-180");
-		snprintf(lines[10], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
-        snprintf(lines[11], MAX_LEN, "event=1:time=1.1");
-				missionSendAndRun(lineList, 12);
+		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
+		snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.3");
+		snprintf(lines[2], MAX_LEN, "vel=0.3, acc=2.0, edger=0.0, white=1:dist=0.7");
+		snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-180");
+		snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
+        snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 6
+				);
         state++;
         break;
 	case 31: 
