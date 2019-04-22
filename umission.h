@@ -120,7 +120,7 @@ private:
   bool racetrack(int & state);
   bool racetrack2(int & state);
   bool axeGate(int & state);
-  
+  bool starttogoal(int & state);
   bool setRacing(int & state);
 
   bool setNormal(int & state);

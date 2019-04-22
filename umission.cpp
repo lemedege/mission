@@ -538,6 +538,31 @@ bool UMission::axeGate(int & state)
 	return finished;
 }
 
+bool UMission::starttogoal(int & state)
+{
+	bool finished = false;
+
+	switch (state)
+	{
+	case 0: //Through Gate
+		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=2,edger=1.0, white=1 : dist=25");
+		snprintf(lines[1], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
+		missionSendAndRun(lineList, 2);
+		state++;
+		break;
+	case 1: 
+		if (bot->event->eventSet(1))
+		{ // finished first drive
+			state = 999;
+		}
+		break;
+	case 999:
+	default:
+		finished = true;
+		break;
+	}
+	return finished;
+}
 
 
 bool UMission::racetrack2(int & state)
