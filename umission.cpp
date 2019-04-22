@@ -210,9 +210,9 @@ while (not finished and not th1stop)
             ended = starttogoal(missionState);
         break;
 		*/
-		case 2: // i mål med 8 point
-            ended = trappedims(missionState);
-        break;
+		//case 2: // i mål med 8 point
+      //      ended = trappedims(missionState);
+      //  break;
 		
 		//case 3: // fra trappe i mål
           //  ended = trappetogoal(missionState);
@@ -222,11 +222,11 @@ while (not finished and not th1stop)
             ended = trappetoreg(missionState);
         break;
 		
-		case 4: // reg til goal
-            ended = regtogoal(missionState);
-        break;
+		//case 4: // reg til goal
+        //    ended = regtogoal(missionState);
+        //break;
 		
-		/*case 4: // reg til tunnel
+		case 4: // reg til tunnel
             ended = regtotunel(missionState);
         break;
 		
@@ -234,9 +234,9 @@ while (not finished and not th1stop)
             ended = tunel(missionState);
         break;
 		
-		case 5: // uden om tunel
-            ended = tuneluden(missionState);
-        break;
+		//case 5: // uden om tunel
+       //     ended = tuneluden(missionState);
+     //   break;
 		
 		case 6: // tunel til racebanen
             ended = tuneltoracetrack(missionState);
