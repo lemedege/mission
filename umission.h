@@ -124,6 +124,7 @@ private:
   bool setRacing(int & state);
   bool trappedims(int & state);
   bool trappetoreg(int & state);
+  bool trappetogoal(int & state); 
   bool racetracktocirkel(int & state);
   bool cirkel(int & state); 
   bool cirkeltogoal(int & state);
