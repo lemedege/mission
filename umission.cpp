@@ -1088,7 +1088,7 @@ switch (state)
 return finished;
 }
 
-bool UMission::cirkel(int & state) // from racetrack to cirkel 
+bool UMission::cirkel(int & state) //  cirkel 
 {
 bool finished = false;
 
@@ -1123,7 +1123,7 @@ switch (state)
     case 11: 
     if (bot->event->eventSet(1))
     { // finished first drive
-        state = 10;
+        state = 999;
     }
     break;
 	
