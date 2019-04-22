@@ -698,7 +698,7 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
 		snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0:time=0.1");
 		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
 		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
-		snprintf(lines[7], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : dist=0.3");
+		snprintf(lines[7], MAX_LEN, "vel=0.4,acc=2,edgel=0.0, white=1 : dist=0.35");
 		snprintf(lines[8], MAX_LEN, "vel=0.0,acc=100.0:time=0.1");
 		snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 10);
