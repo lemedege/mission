@@ -1147,8 +1147,8 @@ switch (state)
                 snprintf(lines[1], MAX_LEN, "vel=0.3,acc=4:lv=1");
 				snprintf(lines[2], MAX_LEN, "vel=0.2,acc=4,edger=1.5,white=1:xl>4");
 				snprintf(lines[3], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
-				snprintf(lines[4], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:dist=3.4");
-				snprintf(lines[5], MAX_LEN, "vel=0.4,acc=6,edger=0.0,white=1:xl>4");
+				snprintf(lines[4], MAX_LEN, "vel=0.3,acc=4,edger=0.0,white=1:dist=3.55");
+				snprintf(lines[5], MAX_LEN, "vel=0.2,acc=2,edger=0.0,white=1:xl>4");
 				snprintf(lines[6], MAX_LEN, "event=1:time=1.1");
                 missionSendAndRun(lineList, 7);
                 state++;
