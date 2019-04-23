@@ -214,9 +214,9 @@ while (not finished and not th1stop)
            ended = trappedims(missionState);
       break;
 		
-		//case 3: // fra trappe i mål
-        //    ended = trappetogoal(missionState);
-        //break;
+		case 3: // fra trappe i mål
+            ended = trappetogoal(missionState);
+        break;
 		
 		
 		
@@ -816,10 +816,10 @@ bool UMission::regtogoal(int & state) // from regbot to goal
         snprintf(lines[1], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.2");
         snprintf(lines[2], MAX_LEN, "vel=0.0,acc=100.0, edgel=0.0, white=1:ir2<0.4");
         snprintf(lines[3], MAX_LEN, "vel=0.0,acc=5.0, edgel=0.0, white=1:ir2>0.6");
-        snprintf(lines[4], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+        snprintf(lines[4], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>12");
 		snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
-		snprintf(lines[6], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
-		snprintf(lines[7], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>16");
+		snprintf(lines[6], MAX_LEN, "vel=0.35,acc=5, edger=1.0, white=1:dist=2.6");
+		snprintf(lines[7], MAX_LEN, "vel=0.35,acc=5, edgel=0.0, white=1:xl>10");
 		snprintf(lines[8], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
 		snprintf(lines[9], MAX_LEN, "vel=0.55, acc=3.0, edger=1.0, white=1: dist=4");
         snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
@@ -910,16 +910,16 @@ bool UMission::tunel(int & state) // trough tunnel closing doors a
 		break;
 		
 	case 20: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edgel=0.0,white=1:dist=0.65");
-                snprintf(lines[1], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
-                snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.27");
-                snprintf(lines[3], MAX_LEN, "tr=0.1,vel=0.3,acc=3:turn=-90");
-                snprintf(lines[4], MAX_LEN, "vel=0.3,acc=5:dist=0.95");
-				snprintf(lines[5], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
-				snprintf(lines[6], MAX_LEN, "vel=0.3,acc=5,white=1:dist=0.2");
-				snprintf(lines[7], MAX_LEN, "vel=0.45,acc=5,white=1:xl>18");
-				snprintf(lines[8], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
-				snprintf(lines[9], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
+		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=3,edgel=0.0,white=1:dist=0.45");
+		snprintf(lines[1], MAX_LEN, "vel=0.4,acc=3:dist=0.7");
+		snprintf(lines[2], MAX_LEN, "vel=-0.2,acc=3:dist=0.5");
+		snprintf(lines[3], MAX_LEN, "vel=0,acc=3:time=0.3");
+		        snprintf(lines[4], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[5], MAX_LEN, "vel=0.3,acc=3:dist=0.25");
+                snprintf(lines[6], MAX_LEN, "tr=0.1,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[7], MAX_LEN, "vel=0.3,acc=5:dist=0.95");
+				snprintf(lines[8], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[9], MAX_LEN, "vel=0.3,acc=5,white=1:dist=0.3");
 				snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 11);
         state++;
@@ -932,18 +932,18 @@ bool UMission::tunel(int & state) // trough tunnel closing doors a
 		break;
 		
 	case 30: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
-                snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
-                snprintf(lines[1], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
-                snprintf(lines[2], MAX_LEN, "vel=0.3,acc=3:dist=0.50");
-                snprintf(lines[3], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
-                snprintf(lines[4], MAX_LEN, "vel=0.3,acc=3:dist=0.95");
-				snprintf(lines[5], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
-				snprintf(lines[6], MAX_LEN, "vel=0.3,acc=5,white=1:xl>18");
-				snprintf(lines[7], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
-				snprintf(lines[8], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
-				snprintf(lines[9], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
-        snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
+	
+				snprintf(lines[0], MAX_LEN, "vel=0.45,acc=5,white=1:xl>18");
+				snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[2], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
+				snprintf(lines[3], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[4], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[5], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=90");
+                snprintf(lines[6], MAX_LEN, "vel=0.3,acc=3:dist=0.50");
+                snprintf(lines[7], MAX_LEN, "tr=0.05,vel=0.3,acc=3:turn=-90");
+                snprintf(lines[8], MAX_LEN, "vel=0.3,acc=3:dist=0.95");
+				snprintf(lines[9], MAX_LEN, "tr=0.2,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 11);
         state++;
         break;
@@ -955,12 +955,16 @@ bool UMission::tunel(int & state) // trough tunnel closing doors a
 		break;
 	
 	case 40: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
-                snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=180");
-                snprintf(lines[1], MAX_LEN, "vel=-0.2,acc=30:time=4");
-				snprintf(lines[2], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.5");
-                snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
-				missionSendAndRun(lineList, 4);
+				snprintf(lines[0], MAX_LEN, "vel=0.3,acc=5,white=1:xl>18");
+				snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=-90");
+				snprintf(lines[2], MAX_LEN, "vel=0.1,acc=3,edgel=0.0,white=1:time=7.0");
+				snprintf(lines[3], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+				snprintf(lines[4], MAX_LEN, "vel=-0.1,acc=3:dist=0.1");
+                snprintf(lines[5], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=180");
+                snprintf(lines[6], MAX_LEN, "vel=-0.2,acc=30:time=4");
+				snprintf(lines[7], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.5");
+                snprintf(lines[8], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 9);
         state++;
         break;
 	case 41: 
