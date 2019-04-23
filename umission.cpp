@@ -225,48 +225,48 @@ while (not finished and not th1stop)
           ended = trappetoreg(missionState);
         break;
 		
-		case 4: // reg til goal
-           ended = regtogoal(missionState);
-        break;
+		//case 4: // reg til goal
+        //   ended = regtogoal(missionState);
+       // break;
 		
-		//case 3: // reg til tunnel
-          //  ended = regtotunel(missionState);
-        //break;
+		case 4: // reg til tunnel
+          ended = regtotunel(missionState);
+        break;
 		
 		//case 4: //  igennem tunel
          //   ended = tunel(missionState);
        // break;
 		
-		//case 5: // uden om tunel
-       //     ended = tuneluden(missionState);
-     //   break;
+		case 5: // uden om tunel
+			ended = tuneluden(missionState);
+        break;
 		
-		//case 2: // tunel til racebanen
-       //     ended = tuneltoracetrack(missionState);
-       // break;
+		case 6: // tunel til racebanen
+            ended = tuneltoracetrack(missionState);
+       break;
          
-       // case 3:
-       //     bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
-	//bot->send("eew\n\0");            
-//ended = true;
-       //     break;
+        case 7:
+            bot->send("robot cedg 1 0.02 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set racing line-parameters
+	bot->send("eew\n\0");            
+ended = true;
+     break;
             
-        //    case 4:
-         //   ended= racetrack(missionState);
-         //   break;
-          /*  
-            case 2:
+            case 8:
+            ended= racetrack(missionState);
+            break;
+            
+            case 9:
                     bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
-	//bot->send("eew\n\0");                   
+	bot->send("eew\n\0");                   
  ended = true;
     break;
 	
 	
-			case 4:
+			case 10:
 				ended = racetracktocirkel(missionState);
 			break;
 			
-			case 5:
+			case 11:
 				ended = cirkelsmal(missionState);
 			break;
 		
@@ -274,10 +274,10 @@ while (not finished and not th1stop)
 			//	ended = cirkelbred(missionState);
 			//break;
 			
-			case 6:
+			case 12:
 				ended = cirkeltogoal(missionState);
 			break;
-*/
+
 
         
         default:
