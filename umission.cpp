@@ -221,9 +221,9 @@ while (not finished and not th1stop)
 		
 		
 		
-		case 3: // fra trappe til reg
-          ended = trappetoreg(missionState);
-        break;
+		//case 3: // fra trappe til reg
+       //   ended = trappetoreg(missionState);
+       // break;
 		
 		//case 4: // reg til goal
         //    ended = regtogoal(missionState);
@@ -261,7 +261,7 @@ while (not finished and not th1stop)
  ended = true;
     break;
 	
-	*/
+	
 			case 4:
 				ended = racetracktocirkel(missionState);
 			break;
@@ -277,7 +277,7 @@ while (not finished and not th1stop)
 			case 6:
 				ended = cirkeltogoal(missionState);
 			break;
-
+*/
 
         
         default:
