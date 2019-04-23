@@ -267,9 +267,13 @@ while (not finished and not th1stop)
 			break;
 			
 			case 5:
-				ended = cirkel(missionState);
+				ended = cirkelsmal(missionState);
 			break;
 		
+			//case 5:
+			//	ended = cirkelbred(missionState);
+			//break;
+			
 			case 6:
 				ended = cirkeltogoal(missionState);
 			break;
@@ -1106,7 +1110,7 @@ switch (state)
 return finished;
 }
 
-bool UMission::cirkel(int & state) //  cirkel 
+bool UMission::cirkelsmal(int & state) //  cirkel 
 {
 bool finished = false;
 
@@ -1130,9 +1134,13 @@ switch (state)
 	
 	case 10: 
    snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=0.2");
-                snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=90");
-                snprintf(lines[2], MAX_LEN, "tr=0.32,vel=0.3,acc=3:turn=290");
-                snprintf(lines[3], MAX_LEN, "vel=0.0,acc=100:time=0.5");
+                snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=99");
+                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=295");
+				snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=99");
+                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=295");
+				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:dist=0.3");
+				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:lv=1");
+				snprintf(lines[3], MAX_LEN, "vel=0.0,acc=100:time=0.5");
                 snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
                 missionSendAndRun(lineList, 5);
                 state++;
@@ -1153,6 +1161,60 @@ switch (state)
 }
 return finished;
 }
+
+
+bool UMission::cirkelbred(int & state) //  cirkel 
+{
+bool finished = false;
+
+switch (state)
+{
+    case 0:
+   snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=1.0");
+				snprintf(lines[1], MAX_LEN, "vel=-0.4,acc=6:time=1.5");
+				snprintf(lines[2], MAX_LEN, "vel=-0.4,acc=5,servo=2,pservo=-700:time=5,dist=0.33");
+				snprintf(lines[3], MAX_LEN, "vel=0,acc=1000:time=0.1");
+				snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+    missionSendAndRun(lineList, 5);
+    state++;
+    break;
+    case 1: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 10;
+    }
+    break;
+	
+	case 10: 
+   snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=0.2");
+                snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=99");
+                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=295");
+				snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=97");
+                snprintf(lines[2], MAX_LEN, "tr=0.38,vel=1.2,acc=3:turn=295");
+				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:dist=0.3");
+				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:lv=1");
+				snprintf(lines[3], MAX_LEN, "vel=0.0,acc=100:time=0.5");
+                snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 5);
+                state++;
+				
+                break;
+    case 11: 
+    if (bot->event->eventSet(1))
+    { // finished first drive
+        state = 999;
+    }
+    break;
+	
+	
+    case 999:
+    default:
+    finished = true;
+    break;
+}
+return finished;
+}
+
 
 
 bool UMission::cirkeltogoal(int & state) // from cirkel to goal 
