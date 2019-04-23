@@ -210,13 +210,13 @@ while (not finished and not th1stop)
             ended = starttogoal(missionState);
         break;
 		*/
-		//case 2: // i mål med 8 point
-      //      ended = trappedims(missionState);
-      //  break;
+		case 2: // i mål med 8 point
+           ended = trappedims(missionState);
+      break;
 		
-		//case 3: // fra trappe i mål
-          //  ended = trappetogoal(missionState);
-        //break;
+		case 3: // fra trappe i mål
+            ended = trappetogoal(missionState);
+        break;
 		
 		
 		
@@ -254,7 +254,7 @@ while (not finished and not th1stop)
         //    case 4:
          //   ended= racetrack(missionState);
          //   break;
-            
+          /*  
             case 2:
                     bot->send("robot cedg 1 0.08 0 1 1e+06 1 1 0.4 0.1 0 1 1 0 1 1 0 1 1e+06 1 0 1 0 1 1 0 1e+06\n\0"); //set normal line-parameter
 	//bot->send("eew\n\0");                   
@@ -273,7 +273,7 @@ while (not finished and not th1stop)
 			case 5:
 				ended = cirkeltogoal(missionState);
 			break;
-
+*/
 
         
         default:
