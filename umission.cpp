@@ -616,9 +616,9 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		snprintf(lines[2], MAX_LEN, "vel=0.2,acc=1,edgel=0,white=1:xl>12");
 		snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=0.1");
 		snprintf(lines[4], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=90");
-		snprintf(lines[5], MAX_LEN, "vel=0.2,acc=2.0,edgel=0,white=1:dist=0.45");
+		snprintf(lines[5], MAX_LEN, "vel=0.2,acc=2.0,edgel=0,white=1:dist=0.40");
 		snprintf(lines[6], MAX_LEN, "tr=0.0,vel=0.3,acc=2:turn=-90");
-		snprintf(lines[7], MAX_LEN, "vel=0.3,acc=2.0,edgel=0,white=1:dist=0.3");
+		snprintf(lines[7], MAX_LEN, "vel=0.3,acc=2.0,edgel=0,white=1:dist=0.4");
 		snprintf(lines[8], MAX_LEN, "vel=0.2,acc=2.0,edgel=0,white=1:xl>5");
 		snprintf(lines[9], MAX_LEN, "vel=0,acc=100:time=0.1");
 		snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
@@ -634,14 +634,14 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		
 	case 20: //Through Gate
 		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.2,acc=1:turn=-90");
-		snprintf(lines[1], MAX_LEN, "vel=0.5,acc=5,edger=1.0:dist=2.70");
+		snprintf(lines[1], MAX_LEN, "vel=0.5,acc=5,edger=1.0:dist=2.50");
 		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=0.2");
-		snprintf(lines[4], MAX_LEN, "vel=0.2,acc=2:time=2,dist=1.3");
-		snprintf(lines[5], MAX_LEN, "tr=-0.01,vel=0.5,acc=2:turn=-180");
-		snprintf(lines[6], MAX_LEN, "vel=0.3,acc=1,edgel=2.0,white=1:dist=0.2");
-		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=5,edger=1.0,white=1:dist=2");
-		snprintf(lines[8], MAX_LEN, "vel=0,acc=100:time=2");
-		snprintf(lines[9], MAX_LEN, "vel=0.1,acc=1,edger=1.0,white=1:xl>5");
+		snprintf(lines[4], MAX_LEN, "vel=0.2,acc=2:time=2,dist=0.15");
+		snprintf(lines[5], MAX_LEN, "tr=0,vel=0.5,acc=2:turn=-90");
+		snprintf(lines[6], MAX_LEN, "vel=0.3,acc=2,edger=0.0:xl>8");
+		snprintf(lines[7], MAX_LEN, "vel=0,acc=100:time=0.2");
+		snprintf(lines[8], MAX_LEN, "tr=0,vel=0.5,acc=2:turn=-90");
+		snprintf(lines[9], MAX_LEN, "vel=0.2,acc=5,edger=1.0,white=1:dist=2");
 		snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 11);
 		state++;
@@ -654,11 +654,13 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		break;
 	
 	case 30: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.1");
-		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=1.0,white=1:xl>16");
-		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=0.5");
-		snprintf(lines[3], MAX_LEN, "event=1:time=1.1");
-				missionSendAndRun(lineList, 4);
+		snprintf(lines[0], MAX_LEN, "vel=0,acc=100:time=2");
+		snprintf(lines[1], MAX_LEN, "vel=0.1,acc=1,edger=1.0,white=1:xl>5");
+		snprintf(lines[2], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.1");
+		snprintf(lines[3], MAX_LEN, "vel=0.3,acc=1,edgel=1.0,white=1:xl>16");
+		snprintf(lines[4], MAX_LEN, "vel=0,acc=100:time=0.5");
+		snprintf(lines[5], MAX_LEN, "event=1:time=1.1");
+				missionSendAndRun(lineList, 6);
 		state++;
 		break;
 		
