@@ -233,13 +233,13 @@ while (not finished and not th1stop)
           ended = regtotunel(missionState);
         break;
 		
-		//case 4: //  igennem tunel
-         //   ended = tunel(missionState);
-       // break;
+		case 5: //  igennem tunel
+           ended = tunel(missionState);
+		break;
 		
-		case 5: // uden om tunel
-			ended = tuneluden(missionState);
-        break;
+		//case 5: // uden om tunel
+		//	ended = tuneluden(missionState);
+        //break;
 		
 		case 6: // tunel til racebanen
             ended = tuneltoracetrack(missionState);
