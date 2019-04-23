@@ -214,16 +214,16 @@ while (not finished and not th1stop)
            ended = trappedims(missionState);
       break;
 		
-		case 3: // fra trappe i mål
-            ended = trappetogoal(missionState);
-        break;
-		
-		
-		
-		
-		//case 2: // fra trappe til reg
-          //  ended = trappetoreg(missionState);
+		//case 3: // fra trappe i mål
+        //    ended = trappetogoal(missionState);
         //break;
+		
+		
+		
+		
+		case 3: // fra trappe til reg
+          ended = trappetoreg(missionState);
+        break;
 		
 		//case 4: // reg til goal
         //    ended = regtogoal(missionState);
@@ -261,19 +261,19 @@ while (not finished and not th1stop)
  ended = true;
     break;
 	
-	
-			case 3:
+	*/
+			case 4:
 				ended = racetracktocirkel(missionState);
 			break;
 			
-			case 4:
+			case 5:
 				ended = cirkel(missionState);
 			break;
 		
-			case 5:
+			case 6:
 				ended = cirkeltogoal(missionState);
 			break;
-*/
+
 
         
         default:
@@ -586,11 +586,11 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 	switch (state)
 	{
 	case 0: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.3, acc=2.0, edger=1.0, white=1: dist=9");
-		snprintf(lines[1], MAX_LEN, "vel=0.4, acc=2.0, edger=1.0, white=1: xl>16");
+		snprintf(lines[0], MAX_LEN, "vel=0.4, acc=2.0, edger=1.0, white=1: dist=9.45");
+		snprintf(lines[1], MAX_LEN, "vel=0.4, acc=2.0, edgel=1.0, white=1: xl>4");
 		snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.5,acc=2:turn=90");
 		snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=0.1");
-		snprintf(lines[4], MAX_LEN, "vel=0.2, acc=1.0, edger=1.0, white=1:dist=1.25");
+		snprintf(lines[4], MAX_LEN, "vel=0.3, acc=1.0, edger=1.0, white=1:dist=1.25");
 		snprintf(lines[5], MAX_LEN, "vel=0.1,acc=5,edger=1.0,white=1:lv=0");
 		snprintf(lines[6], MAX_LEN, "vel=0.1, acc=5, edger=1.0, white=1:dist=0.5");
 		snprintf(lines[7], MAX_LEN, "vel=0,acc=10:time=1");
@@ -608,14 +608,14 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		break;
 		
 	case 10: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=1,edgel=0,white=1:dist=0.4");
+		snprintf(lines[0], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:dist=0.4");
 		snprintf(lines[1], MAX_LEN, "vel=0.3,acc=1,edgel=0,white=1:xl>16");
 		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=2");
 		snprintf(lines[3], MAX_LEN, "tr=0.0,vel=0.2,acc=1:turn=-90");
 		snprintf(lines[4], MAX_LEN, "vel=0.5,acc=5,edger=1.0:dist=2.75");
 		snprintf(lines[5], MAX_LEN, "vel=0,acc=100:time=0.5");
-		snprintf(lines[6], MAX_LEN, "vel=0.1,acc=2,edger=1.0,white=1:xl>16");
-		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.3");
+		snprintf(lines[6], MAX_LEN, "vel=0.2,acc=2,edger=1.0,white=1:xl>8");
+		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.2");
 		snprintf(lines[8], MAX_LEN, "tr=-0.01,vel=0.5,acc=2:turn=-180");
 		snprintf(lines[9], MAX_LEN, "vel=0.3,acc=1,edgel=2.0,white=1:dist=0.2");
 		snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
@@ -630,9 +630,9 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		break;
 		
 	case 20: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.1,acc=5,edger=1.0,white=1:dist=2");
+		snprintf(lines[0], MAX_LEN, "vel=0.2,acc=5,edger=1.0,white=1:dist=2");
 		snprintf(lines[1], MAX_LEN, "vel=0,acc=100:time=2");
-		snprintf(lines[2], MAX_LEN, "vel=0.1,acc=1,edger=1.0,white=1:xl>8");
+		snprintf(lines[2], MAX_LEN, "vel=0.1,acc=1,edger=1.0,white=1:xl>5");
 		snprintf(lines[3], MAX_LEN, "vel=0.2,acc=100:time=2,dist=0.1");
 		snprintf(lines[4], MAX_LEN, "vel=0.3,acc=1,edgel=1.0,white=1:xl>16");
 		snprintf(lines[5], MAX_LEN, "vel=0,acc=100:time=0.5");
@@ -719,7 +719,7 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
         snprintf(lines[4], MAX_LEN, "vel=0.0, acc=100.0, edgel=0.0, white=1:time=0.1");
 		snprintf(lines[5], MAX_LEN, "tr=0.1,vel=0.2,acc=2:turn=90");
 		snprintf(lines[6], MAX_LEN, "vel=0.0,acc=5:time=0.1");
-		snprintf(lines[7], MAX_LEN, "vel=0.5,acc=5:dist=0.51");
+		snprintf(lines[7], MAX_LEN, "vel=0.5,acc=5:dist=0.50");
 		snprintf(lines[8], MAX_LEN, "vel=0.0, acc=100.0:time=0.1");
         snprintf(lines[9], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 10);
@@ -739,10 +739,10 @@ bool UMission::trappetoreg(int & state) // from trappe end to regbot (aka center
         snprintf(lines[3], MAX_LEN, "vel=0.35,acc=5:lv=1");
         snprintf(lines[4], MAX_LEN, "tr=0.0,vel=0.5,acc=2:turn=90");
 		snprintf(lines[5], MAX_LEN, "vel=0.0,acc=5:time=0.5");
-		snprintf(lines[6], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=2.65");
-		snprintf(lines[7], MAX_LEN, "vel=0.25,acc=5, edgel=0.0, white=1:xl>8");
-		snprintf(lines[8], MAX_LEN, "vel=0.35, acc=5, edger=0.0, white=1: dist=5.7");
-		snprintf(lines[9], MAX_LEN, "vel=0.25,acc=5, edgel=0.0, white=1:xl>8");
+		snprintf(lines[6], MAX_LEN, "vel=0.3, acc=5, edger=0.0, white=1: dist=2.65");
+		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=5, edgel=0.0, white=1:xl>8");
+		snprintf(lines[8], MAX_LEN, "vel=0.3, acc=5, edger=0.0, white=1: dist=5.7");
+		snprintf(lines[9], MAX_LEN, "vel=0.2,acc=5, edgel=0.0, white=1:xl>8");
         snprintf(lines[10], MAX_LEN, "event=1:time=1.1");
 				missionSendAndRun(lineList, 11);
         state++;
