@@ -636,8 +636,8 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 		snprintf(lines[0], MAX_LEN, "tr=0.0,vel=0.2,acc=1:turn=-90");
 		snprintf(lines[1], MAX_LEN, "vel=0.5,acc=5,edger=1.0:dist=2.60");
 		snprintf(lines[2], MAX_LEN, "vel=0,acc=100:time=0.2");
-		snprintf(lines[4], MAX_LEN, "vel=0.2,acc=2:time=2,dist=0.06");
-		snprintf(lines[5], MAX_LEN, "tr=0,vel=0.5,acc=2:turn=-90");
+		snprintf(lines[4], MAX_LEN, "vel=0.2,acc=2:dist=0.06");
+		snprintf(lines[5], MAX_LEN, "tr=0,vel=0.3,acc=2:turn=-90");
 		snprintf(lines[6], MAX_LEN, "vel=0,acc=100:time=0.4");
 		snprintf(lines[7], MAX_LEN, "vel=0.2,acc=2:time=2,dist=0.12");
 		snprintf(lines[8], MAX_LEN, "vel=0.15,acc=2,edger=0.0:xl>4");
