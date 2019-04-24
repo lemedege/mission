@@ -1142,14 +1142,12 @@ switch (state)
 	case 10: 
    snprintf(lines[0], MAX_LEN, "servo=2,pservo=700:time=0.2");
                 snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=99");
-                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=295");
-				snprintf(lines[1], MAX_LEN, "tr=0.0,vel=0.3,acc=3:turn=99");
-                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=295");
+                snprintf(lines[2], MAX_LEN, "tr=0.31,vel=1.2,acc=3:turn=292");
 				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:dist=0.3");
-				snprintf(lines[3], MAX_LEN, "vel=0.4,acc=6:lv=1");
-				snprintf(lines[3], MAX_LEN, "vel=0.0,acc=100:time=0.5");
-                snprintf(lines[4], MAX_LEN, "event=1:time=1.1");
-                missionSendAndRun(lineList, 5);
+				snprintf(lines[4], MAX_LEN, "vel=0.4,acc=6:lv=1");
+				snprintf(lines[5], MAX_LEN, "vel=0.0,acc=100:time=0.5");
+                snprintf(lines[6], MAX_LEN, "event=1:time=1.1");
+                missionSendAndRun(lineList, 7);
                 state++;
 				
                 break;
