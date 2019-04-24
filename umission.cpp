@@ -590,8 +590,8 @@ bool UMission::trappedims(int & state) // gullutine port -> ramp up, tippe ned r
 	switch (state)
 	{
 	case 0: //Through Gate
-		snprintf(lines[0], MAX_LEN, "vel=0.4, acc=2.0, edger=1.0, white=1: dist=9.45");
-		snprintf(lines[1], MAX_LEN, "vel=0.225, acc=2.0, edgel=0.0, white=1: xl>4");
+		snprintf(lines[0], MAX_LEN, "vel=0.4, acc=2.0, edger=1.0, white=1: dist=9.5");
+		snprintf(lines[1], MAX_LEN, "vel=0.225, acc=2.0, edgel=0.0, white=1: xl>6");
 		snprintf(lines[2], MAX_LEN, "tr=0.05,vel=0.5,acc=2:turn=90");
 		snprintf(lines[3], MAX_LEN, "vel=0,acc=100:time=0.1");
 		snprintf(lines[4], MAX_LEN, "vel=0.3, acc=1.0, edger=0.0, white=1:dist=1.25");
