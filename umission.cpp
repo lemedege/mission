@@ -1060,8 +1060,8 @@ bool finished = false;
 switch (state)
 {
     case 0: //race track 
-    snprintf(lines[0], MAX_LEN, "vel=0.5,acc=4,edger=0.0,white=1:dist=0.3");
-                snprintf(lines[1], MAX_LEN, "vel=1.5,acc=5,edgel=0.0,white=1:dist=0.3");
+    snprintf(lines[0], MAX_LEN, "vel=0.5,acc=3,edger=0.0,white=1:dist=0.3");
+                snprintf(lines[1], MAX_LEN, "vel=1.5,acc=3,edgel=0.0,white=1:dist=0.3");
                 snprintf(lines[2], MAX_LEN, "vel=2.5,acc=2,edgel=0.0,white=1:dist=6.9");
                 snprintf(lines[3], MAX_LEN, "vel=0,acc=10:time=1");
 				snprintf(lines[4], MAX_LEN, "vel=0.3,acc=2,edgel=0.0,white=1:xl>10");
